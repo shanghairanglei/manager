@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.hobbymapper.HobbyMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.Hobby">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="hobby" jdbcType="VARCHAR" property="hobby" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, t_user_id, hobby
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rl_hobby
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rl_hobby
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rl.model.Hobby">
+    insert into rl_hobby (id, t_user_id, hobby
+      )
+    values (#{id,jdbcType=INTEGER}, #{tUserId,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.model.Hobby">
+    insert into rl_hobby
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tUserId != null">
+        t_user_id,
+      </if>
+      <if test="hobby != null">
+        hobby,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tUserId != null">
+        #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rl.model.Hobby">
+    update rl_hobby
+    <set>
+      <if test="tUserId != null">
+        t_user_id = #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        hobby = #{hobby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rl.model.Hobby">
+    update rl_hobby
+    set t_user_id = #{tUserId,jdbcType=VARCHAR},
+      hobby = #{hobby,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--根据员工id查询兴趣爱好-->
+  <select id="selectHobbyById" parameterType="String" resultMap="BaseResultMap">
+    SELECT h.t_user_id,
+    h.hobby
+    FROM rl_hobby AS h WHERE h.t_user_id=#{tUserId}
+  </select>
+
+  <!--添加兴趣爱好-->
+  <insert id="addHobby" parameterType="com.rl.model.Hobby">
+    insert into rl_hobby
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tUserId != null">
+        t_user_id,
+      </if>
+      <if test="hobby != null">
+        hobby,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tUserId != null">
+        #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

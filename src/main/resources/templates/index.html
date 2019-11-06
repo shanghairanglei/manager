@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8">
+	<title>登录</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/logo.css" />
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+<section class="signin">
+	<div class="container">
+		<div class="sign-content">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="col-sm-12">
+						<div class="box">
+							<form action="/Login/userLogin" method="post">
+								<div class="header">
+									<h1>Hi‘ <small>早上好</small></h1>
+								</div>
+								<div class="bottom col-sm-8 col-md-offset-2">
+									<div class="center-block  div-logo"><img src="/static/img/logo1.jpg" class="img-logo"></div>
+									<div class="signin-form">
+										<div class="form-group">
+											<input type="text" name="username" class="form-control" placeholder="请输入用户名">
+										</div>
+										<div class="form-group">
+											<input type="password" name="password" class="form-control" placeholder="请输入您的密码">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-8 col-md-offset-2 col-xs-12">
+										<div class="signin-footer">
+											<input type="submit" class="btn signin_btn" data-toggle="modal" data-target=".signin_modal" value="立即登录 ">
+										</div>
+										<img class="people" src="/static/img/people.png">
+									</div>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="row">
+	<!--<div style="margin-top: 146px">-->
+
+	<!--</div>-->
+	<div class="wave-box">
+		<div class="marquee-box marquee-up" id="marquee-box">
+			<div class="marquee">
+				<div class="wave-list-box" id="w ave-list-box1">
+					<ul>
+						<li>
+							<img height="60" alt="波浪" src="/static/img/bolang1.png">
+						</li>
+					</ul>
+				</div>
+				<div class="wave-list-box" id="wave-list-box2">
+					<ul>
+						<li>
+							<img height="60" alt="波浪" src="/static/img/bolang1.png">
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="marquee-box" id="marquee-box3">
+			<div class="marquee">
+				<div class="wave-list-box" id="wave-list-box4">
+					<ul>
+						<li>
+							<img height="60" alt="波浪" src="/static/img/bolang3.png">
+						</li>
+					</ul>
+				</div>
+				<div class="wave-list-box" id="wave-list-box5">
+					<ul>
+						<li>
+							<img height="60" alt="波浪" src="/static/img/bolang2.png">
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="marquee-box marquee-up">
+			<div class="marquee">
+				<div class="wave-list-box" id="wave-list-box1">
+					<ul>
+						<li>
+							<img height="60" alt="波浪" src="/static/img/bolang3.png">
+						</li>
+					</ul>
+				</div>
+				<div class="wave-list-box">
+					<ul>
+						<li>
+							<img height="60" alt="波浪" src="/static/img/bolang3.png">
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="/static/js/message.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-1.10.2.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/show.js" type="text/javascript" charset="utf-8"></script>
+</html>

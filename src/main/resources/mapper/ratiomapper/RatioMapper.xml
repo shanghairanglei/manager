@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.ratiomapper.RatioMapper">
+    <resultMap id="BaseResultMap" type="com.rl.model.Workplans">
+        <id column="wp_id" jdbcType="INTEGER" property="wpId" />
+        <result column="wp_name" jdbcType="VARCHAR" property="wpName" />
+        <result column="wp_startTime" jdbcType="TIMESTAMP" property="wpStarttime" />
+        <result column="wp_endTime" jdbcType="TIMESTAMP" property="wpEndtime" />
+        <result column="wp_content" jdbcType="VARCHAR" property="wpContent" />
+        <result column="wp_keypoint" jdbcType="INTEGER" property="wpKeypoint" />
+        <result column="wp_prospect_performance" jdbcType="INTEGER" property="wpProspectPerformance" />
+        <result column="wp_actual_performance" jdbcType="INTEGER" property="wpActualPerformance" />
+        <result column="wp_remark" jdbcType="VARCHAR" property="wpRemark" />
+        <result column="wp_createDate" jdbcType="TIMESTAMP" property="wpCreatedate" />
+        <result column="wp_status" jdbcType="INTEGER" property="wpStatus" />
+        <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="file_id" jdbcType="INTEGER" property="fileId" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        wp_id, wp_name, wp_startTime, wp_endTime, wp_content, wp_keypoint, wp_prospect_performance,
+        wp_actual_performance, wp_remark, wp_createDate, wp_status, t_user_id, file_id
+    </sql>
+
+
+    <!--查询所有人员绩效,除领导,分页-->
+    <select id="selectUserRatioList" resultMap="BaseResultMap">
+        SELECT w.wp_id,
+               w.wp_name,
+               w.wp_startTime,
+               w.wp_endTime,
+               w.wp_content,
+               w.wp_keypoint,
+               w.wp_prospect_performance,
+               w.wp_actual_performance,
+               w.wp_remark,
+               w.wp_createDate,
+               w.wp_status,
+               w.t_user_id,
+               w.file_id
+               FROM rl_workplans AS w LEFT JOIN t_user AS e ON w.t_user_id=e.t_user_id
+                <where>
+
+                    <if test="name!=null">
+                        AND e.name=#{name}
+                    </if>
+                    <if test="deptId != null">
+                        AND e.dept_id=#{deptId}
+                    </if>
+                    <if test="wpStarttime != null and wpStarttime !=''">
+                       AND w.wpStarttime&gt;#{wp_startTime,jdbcType=TIMESTAMP}
+                    </if>
+                    <if test="wpEndtime != null and wpEndtime !=''">
+                        AND w.wpEndtime&lt;#{wp_endTime,jdbcType=TIMESTAMP}
+                    </if>
+
+                </where>
+    </select>
+</mapper>

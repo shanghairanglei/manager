@@ -1,0 +1,43 @@
+Manifest-Version: 1.0
+Class-Path: log4j-to-slf4j-2.11.2.jar pagehelper-5.1.2.jar spring-cont
+ ext-5.1.9.RELEASE.jar thymeleaf-spring5-3.0.11.RELEASE.jar mybatis-ge
+ nerator-core-1.3.5.jar json-lib-2.4-jdk15.jar commons-lang-2.5.jar sp
+ ring-core-5.1.9.RELEASE.jar commons-codec-1.11.jar spring-boot-2.1.7.
+ RELEASE.jar hibernate-validator-6.0.17.Final.jar jackson-core-2.9.9.j
+ ar java-jwt-3.4.0.jar bootstrap-4.1.3.jar shiro-web-1.4.0.jar spring-
+ boot-starter-web-2.1.7.RELEASE.jar jconsole.jar commons-beanutils-1.8
+ .0.jar shiro-crypto-hash-1.4.0.jar spring-boot-autoconfigure-2.1.7.RE
+ LEASE.jar thymeleaf-extras-java8time-3.0.4.RELEASE.jar poi-3.15.jar j
+ sqlparser-1.0.jar shiro-crypto-cipher-1.4.0.jar jackson-annotations-2
+ .9.0.jar slf4j-api-1.7.26.jar commons-fileupload-1.3.1.jar thymeleaf-
+ extras-shiro-2.0.0.jar snakeyaml-1.23.jar log4j-api-2.11.2.jar spring
+ -aop-5.1.9.RELEASE.jar shiro-lang-1.4.0.jar HikariCP-3.2.0.jar mybati
+ s-spring-1.3.0.jar spring-boot-starter-2.1.7.RELEASE.jar jquery-3.0.0
+ .jar ezmorph-1.0.6.jar shiro-config-core-1.4.0.jar spring-jdbc-5.1.9.
+ RELEASE.jar classmate-1.4.0.jar tomcat-embed-core-9.0.22.jar shiro-ev
+ ent-1.4.0.jar validation-api-2.0.1.Final.jar jackson-datatype-jsr310-
+ 2.9.9.jar shiro-cache-1.4.0.jar curvesapi-1.04.jar attoparser-2.0.5.R
+ ELEASE.jar shiro-ehcache-1.2.2.jar commons-collections-3.2.1.jar tomc
+ at-embed-el-9.0.22.jar stax-api-1.0.1.jar shiro-crypto-core-1.4.0.jar
+  shiro-config-ogdl-1.4.0.jar spring-boot-starter-json-2.1.7.RELEASE.j
+ ar popper.js-1.14.3.jar shiro-core-1.4.0.jar spring-boot-starter-tomc
+ at-2.1.7.RELEASE.jar logback-classic-1.2.3.jar log4j-1.2.14.jar sprin
+ g-webmvc-5.1.9.RELEASE.jar jackson-module-parameter-names-2.9.9.jar x
+ mlbeans-2.6.0.jar tools.jar spring-tx-5.1.9.RELEASE.jar commons-colle
+ ctions4-4.1.jar mysql-connector-java-5.1.6.jar jboss-logging-3.3.2.Fi
+ nal.jar spring-expression-5.1.9.RELEASE.jar pagehelper-spring-boot-st
+ arter-1.2.3.jar commons-io-2.4.jar mybatis-3.4.0.jar spring-boot-devt
+ ools-2.1.7.RELEASE.jar mybatis-spring-boot-starter-1.1.1.jar druid-1.
+ 0.28.jar jxl-2.6.12.jar spring-beans-5.1.9.RELEASE.jar jjwt-0.9.1.jar
+  mybatis-spring-boot-autoconfigure-1.1.1.jar ehcache-core-2.5.0.jar j
+ avax.annotation-api-1.3.2.jar fastjson-1.1.26.jar commons-logging-1.1
+ .1.jar spring-jcl-5.1.9.RELEASE.jar shiro-spring-1.4.0.jar spring-boo
+ t-starter-jdbc-2.1.7.RELEASE.jar jackson-databind-2.9.9.jar poi-ooxml
+ -3.15.jar spring-boot-starter-logging-2.1.7.RELEASE.jar unbescape-1.1
+ .6.RELEASE.jar jackson-datatype-jdk8-2.9.9.jar poi-ooxml-schemas-3.15
+ .jar spring-web-5.1.9.RELEASE.jar logback-core-1.2.3.jar jul-to-slf4j
+ -1.7.26.jar thymeleaf-3.0.11.RELEASE.jar spring-boot-starter-thymelea
+ f-2.1.7.RELEASE.jar tomcat-embed-websocket-9.0.22.jar pagehelper-spri
+ ng-boot-autoconfigure-1.2.3.jar
+Main-Class: com.rl.ManagerApplication
+

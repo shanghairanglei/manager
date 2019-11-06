@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.sharedfilemapper.SharedfileMapper">
+  <resultMap id="fileBaseResultMap" type="com.rl.model.Fileupload">
+    <id column="file_id" jdbcType="INTEGER" property="fileId" />
+    <result column="file_createDate" jdbcType="TIMESTAMP" property="fileCreatedate" />
+    <result column="file_deleteDate" jdbcType="TIMESTAMP" property="fileDeletedate" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="file_readAccount" jdbcType="INTEGER" property="fileReadaccount" />
+    <result column="file_priority" jdbcType="INTEGER" property="filePriority" />
+    <result column="file_kinds" jdbcType="INTEGER" property="fileKinds" />
+    <result column="file_status" jdbcType="INTEGER" property="fileStatus" />
+    <result column="action_id" jdbcType="INTEGER" property="actionId" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_uploader" jdbcType="VARCHAR" property="fileUploader" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+  </resultMap>
+
+  <resultMap id="fileBaseResultMaps" type="com.rl.model.SharedFileEntity">
+    <id column="file_id" jdbcType="INTEGER" property="fileId" />
+    <result column="file_createDate" jdbcType="TIMESTAMP" property="fileCreatedate" />
+    <result column="file_deleteDate" jdbcType="TIMESTAMP" property="fileDeletedate" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="file_readAccount" jdbcType="INTEGER" property="fileReadaccount" />
+    <result column="file_priority" jdbcType="INTEGER" property="filePriority" />
+    <result column="file_kinds" jdbcType="INTEGER" property="fileKinds" />
+    <result column="file_status" jdbcType="INTEGER" property="fileStatus" />
+    <result column="action_id" jdbcType="INTEGER" property="actionId" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_uploader" jdbcType="VARCHAR" property="fileUploader" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+
+  <resultMap id="actionBaseResultMap" type="com.rl.model.ActionRecord">
+    <id column="action_id" jdbcType="INTEGER" property="actionId" />
+    <result column="action_time" jdbcType="TIMESTAMP" property="actionTime" />
+    <result column="action_kinds" jdbcType="INTEGER" property="actionKinds" />
+    <result column="action_name" jdbcType="VARCHAR" property="actionName" />
+    <result column="file_id" jdbcType="INTEGER" property="fileId" />
+  </resultMap>
+
+  <!--文件列表分页-->
+  <select id="selectsharedFileList" resultMap="fileBaseResultMaps" parameterType="string">
+    SELECT  f.file_id,
+            f.file_createDate,
+            f.file_deleteDate,
+            f.file_path,
+            f.file_readAccount,
+            f.file_priority,
+            f.file_kinds,
+            f.file_status,
+            f.action_id,
+            f.file_name,
+            f.file_uploader,
+            f.t_user_id,
+            t.name FROM
+            sys_fileupload AS f LEFT JOIN t_user AS t ON t.t_user_id=f.t_user_id
+    <where>
+      <if test="tUserId!=null">
+        AND f.t_user_id=#{tUserId}
+      </if>
+      <if test="fileName != null">
+        AND f.file_name=#{fileName}
+      </if>
+    </where>
+  </select>
+
+  <!--删除文件,放入回收站中-->
+  <delete id="deleteFileByFileId" parameterType="integer">
+    UPDATE sys_fileupload
+    SET file_status=0
+    WHERE file_id=#{fileId}
+  </delete>
+
+  <!--删除文件后添加该文件的操作记录-->
+  <insert id="addActionRecord" parameterType="com.rl.model.ActionRecord">
+    insert into rl_action_record
+                (action_id,
+                action_time,
+                action_kinds,
+                action_name,
+                file_id)
+                values  (#{actionId},
+                #{actionTime},
+                #{actionKinds},
+                #{actionName},
+                #{fileId})
+            values  (#{actionId},
+            #{actionTime},
+            #{actionKinds},
+            #{actionName},
+            #{fileId})
+  </insert>
+
+  <!--操作记录查询-->
+  <select id="selectFileRecordList" resultMap="actionBaseResultMap">
+    SELECT action_id,
+            action_time,
+            action_kinds,
+            action_name,
+    file_id FROM rl_action_record WHERE file_id=#{fileId};
+  </select>
+
+  <!--通过姓名查询员工tuserId-->
+  <select id="selecttUserIdByName" parameterType="string" resultType="string">
+    SELECT t_user_id FROM t_user WHERE name=#{name}
+  </select>
+</mapper>

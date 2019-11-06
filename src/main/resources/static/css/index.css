@@ -1,0 +1,90 @@
+.life{
+	font-size: 0.3rem;	
+	color: #FFFFFF;
+	/* margin-left: 50px; */
+}
+/* 主体bottom */
+.submit1 {
+    width: 110px;
+    height: 35px;
+    border: 1px solid #5295CE;
+    border-radius: 20px 20px 20px 20px;
+	text-align: center;
+	line-height: 35px;
+    font-size: 0.18rem;
+    color: #FFFFFF;
+    cursor: pointer;
+    background-image: linear-gradient(90deg,#FFFFFF,#FFFFFF),linear-gradient(90deg,#000,#4f93cd);
+    background: -webkit-linear-gradient(left, #FFFFFF , #4f93cd);
+    background: -o-linear-gradient(right, #FFFFFF, #4f93cd);
+    background: -moz-linear-gradient(right, #FFFFFF, #4f93cd);
+    background: linear-gradient(to right, #FFFFFF , #4f93cd);
+}
+
+@media (min-width: 768px){
+	.dl-horizontal dt {
+	    float: left;
+	    width: auto;
+	    overflow: hidden;
+	    clear: left;
+	    text-align: right;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	}
+	.dl-horizontal dd {
+	    margin-left: 35px;
+	}
+	.form-control {
+		width: auto;
+		margin-left: 4px;
+	}
+	.lay{
+		margin-left: 32px;
+	}
+	.Shared{
+		width: 90px;
+		height: 25px;
+		border-left: 3px solid #182b5c;
+		text-align: center;
+		line-height: 25px;
+		font-size: 0.18rem;
+		margin-top: 7px;
+	}
+	.middle-bottom{
+		height: 80px;
+	}
+	.panel-default>.panel-heading {
+	    color: #333;
+	    background-color: #FFFFFF;
+	}
+	.middle-bottom>.row{
+		line-height: 40px;
+	}
+	.dl-horizontal>dt{
+		line-height: 30px;
+	}
+	.table{
+		text-align: center;
+	}
+	.table>thead>tr>th{
+		text-align: center;
+	}
+	.table>tbody>tr>td>button>span{
+		color: black;
+		margin-left: 5px;
+	}
+}
+.table>tbody>tr>td>button{
+		background: #FFFFFF;
+		border: 1px solid #FFFFFF;
+		text-align: center;
+	}
+@media (min-width: 768px) and (max-width: 1600px) { 
+	.form-control {
+		width: 100px;
+		margin-left: 4px;
+	}
+	.lay {
+		margin-left: 32px;
+	}
+}

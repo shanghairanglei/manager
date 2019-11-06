@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BOOS绩效管理</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/static/css/nav.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/boos.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+    <script src="/static/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- top -->
+    <nav class="navbar top-navbar base-index" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"><img src="/static/img/logo.jpg" class="logo"></a>
+        </div>
+        <p class="navbar-text .visible-xs-block">早上好，欢迎来到让雷科技  !</p>
+        <ul class="nav navbar-nav navbar-right base-nav">
+            <li><a href="" class="timeaa"><span class="iconfont">&#xe663;</span></a></li>
+            <li><a th:href="@{'/performance/personalCenter?tUserId='+${session.user.tUserId}+'&roleId='+${session.roleId}}"><span class="iconfont">&#xe647;</span> 我的绩效</a></li>
+            <li><a href="/personal/go"><img th:src="@{${session.user.img}}"
+                                 style="border-radius: 50%; width: 30px;height: 30px;margin-right: 10px;">个人中心</a></li>
+        </ul>
+        <div class="Crumbs">
+            <ul class="breadcrumb">
+                <li><a href="#">让雷科技</a></li>
+                <li class="active">绩效统计</li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a class="active-menu" href="/upload/findWork"><span class="iconfont">&#xe64f;</span>
+                        <cite>计划总结</cite></a>
+                </li>
+                <li>
+                    <a class="active-menu" href="/workplan/go"><span class="iconfont">&#xe663;</span> <cite>工作计划</cite></a>
+                </li>
+                <li class="nav-click" th:if="(${session.roleId} eq 2) or (${session.roleId} eq 3) or (${session.roleId} eq 5)">
+                    <a class="active-menu" href="/performance/checkRole"><span class="iconfont">&#xe647;</span>
+                        <cite>绩效统计</cite></a>
+                </li>
+                <li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 5)">
+                    <a class="active-menu" href="/user/go"><span class="iconfont">&#xe68f;</span>
+                        <cite>人员管理</cite></a>
+                </li>
+                <li>
+                    <a class="active-menu" href="/team/go"><span class="iconfont">&#xe610;</span>
+                        <cite>团队介绍</cite></a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="row box1">
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <dl class="dl-horizontal">
+                                    <dt class="plan"><a href="">成员绩效</a></dt>
+                                </dl>
+                            </div>
+                            <div class="row" style="margin-top: 30px;">
+                                <div class="col-xs-9">
+                                    <div class="form-group input-group">
+                                        <input type="text" class="form-control" id="searchname">
+                                        <span class="input-group-btn">
+													<button class="btn btn-default" type="button"
+                                                            onclick="searchName()"><i
+                                                            class="glyphicon glyphicon-search  form-control-feedback"></i>
+													</button>
+												</span>
+                                    </div>
+                                </div>
+                                <div id="getmessage">
+                                    <div class="col-xs-12" th:each="user,state:${userList}">
+                                        <div class="col-xs-3">
+                                            <p class="nature" th:text="${user.firstUpperCase}">D</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="surname" th:text="${user.name}"></div>
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <a class="glyphicon glyphicon-chevron-right righ"
+                                               th:href="@{'/performance/getUserMessageBoss?tUserId='+${user.tUserId}}"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="panel panel-default">
+                                <div class="row">
+                                    <div class="panel-heading">
+                                        <div class="col-sm-8 col-md-9 col-md-offset-2 col-xs-12">
+                                            <ul class="nav nav-pills">
+                                                <li id="year" class=""><a href="#profile-pills" data-toggle="tab"
+                                                                          onclick="getYearPerformance(-365)">年</a>
+                                                </li>
+                                                <li id="month" class="active"><a href="#profile-pills" data-toggle="tab"
+                                                                                 onclick="getYearPerformance(-31)">月</a>
+                                                </li>
+                                                <li id="week" class=""><a href="#profile-pills" data-toggle="tab"
+                                                                          onclick="getYearPerformance(-7)">周</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row contera">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade active in" id="profile-pills">
+                                                <div class="row">
+                                                    <p id="sum" th:text="${sumplans}">累 计：暂无</p>
+                                                    <p class="text-center text-font"><span class="iconfont">&#xe63c;</span>能来到这个界面的，肯定不是一般人，请领导视察工作</p>
+                                                    <div id="main1" style="width: 80%; height:200px;margin: 0 auto; ">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="right">
+                        <div class="row" th:each="user,state:${userList}">
+                            <div class="col-xs-12">
+                                <div class="col-xs-1">
+                                    <img th:src="@{${user.img}}" class="img-circle">
+                                </div>
+                                <div class="col-xs-8">
+                                    <ul class="right-font">
+                                        <li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
+                                        <li th:text="${user.userpost}">UI工程师</li>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a th:href="@{'#'+${state.count}}" aria-expanded="false" data-toggle="collapse"
+                                       class="collapsed">
+                                        <font style="vertical-align: inherit;">
+                                            <span class="iconfont right-span tooltip-show" data-toggle="tooltip"
+                                                  title="点击展开" data-placement="bottom">&#xe64b;</span>
+                                        </font>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <ul th:id="${state.count}" class="list-unstyled collapse" style="">
+                                        <p class="brief-introduction" th:text="${user.description}">白少</p>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<div>
+    <!--隐藏域，存放用户id-->
+    <input type="hidden" name="field＿name" id="firstuser" th:value="${firstuser}">
+</div>
+</div>
+</body>
+<script src="/static/js/chart.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/message.js" type="text/javascript" charset="utf-8"></script>
+<script th:inline="javascript" type="text/javascript">
+
+    var temp;
+    var wpActualPerformance = [[${wpActualPerformance}]];//实际绩效点
+    var unfinished = [[${wpProspectPerformance}]]-[[${wpActualPerformance}]];//未完成绩效点
+    var msalary=[[${m_salary}]]//月薪
+    var res=[[${y_salary}]]-[[${m_salary}]]//月薪，年薪差值
+
+    var workrate=wpActualPerformance/[[${wpProspectPerformance}]]
+    $(document).ready(function () {
+        //赋值
+        performance();
+    });
+
+    //按照姓名搜索
+    function searchName() {
+        var name = $("#searchname").val();
+        if (name != "") {
+            $.ajax({
+                type: "POST",
+                url: "/performance/searchUserByName",
+                data: {
+                    "name": name
+                },
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                success: function (data) {//返回数据根据结果进行相应的处理
+                    if (data.user != null) {
+                        temp = data.user.tUserId;
+                        var str = "";
+                        var firststr = data.user.name.toString().substring(0, 1);
+                        var name = data.user.name.toString();
+                        str += '<div class="col-xs-12">';
+                        str += '<div class="col-xs-3">';
+                        str += '<p class="nature"  id="firstUpperCase">' + firststr + '</p></div><div class="col-xs-6">';
+                        str += '<div class="surname" id="chinese">' + name + '</div></div><div class="col-xs-1">';
+                        str += ' <a class="glyphicon glyphicon-chevron-right righ" href="#" onclick="getDataStr()"></a></div></div>';
+                        str += '';
+                        $("#getmessage").html(str);
+                        $.ajax({
+                            type: "POST",
+                            url: "/performance/getUserPerformanceData",
+                            data: {
+                                "tUserId": temp
+                            },
+                            contentType: "application/x-www-form-urlencoded",
+                            dataType: "json",
+                            success: function (data) {//返回数据根据结果进行相应的处理
+                                wpActualPerformance = data.wpActualPerformance;
+                                unfinished =  data.wpProspectPerformance- data.wpActualPerformance;
+                                msalary = data.m_salary;
+                                res=data.y_salary-data.m_salary
+                                $("#week").attr("class", "");
+                                $("#year").attr("class", "");
+                                $("#month").attr("class", "active");
+                                performance();
+                            },
+                            error: function () {
+                                alert('返回消息失败').then({
+
+                                })
+                            }
+                        });
+
+                    } else {
+                        alert('您搜索的用户不存在').then({
+
+                         })
+                            //  alert("")
+                    }
+                },
+                error: function () {
+                    alert('返回消息失败').then({
+
+                    })
+                }
+            });
+        } else {
+            alert('请输入姓名').then({
+
+            })
+        }
+    }
+
+
+    //年/月/周查看绩效
+    function getYearPerformance(v) {
+        //获取隐藏域中用户id
+        var tUserId = $("#firstuser").val();
+        $.ajax({
+            type: "POST",
+            url: "/performance/getUserPerBoss",
+            data: {
+                "tUserId": tUserId,
+                "v": v
+            },
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            success: function (data) {//返回数据根据结果进行相应的处理
+                wpActualPerformance = data.wpActualPerformance;
+                unfinished =  data.wpProspectPerformance- data.wpActualPerformance;
+                msalary = data.m_salary;
+                res=data.y_salary-data.m_salary
+                performance();
+                $("#sum").val(data.sumplans.toString())
+            },
+            error: function () {
+                alert("返回消息失败");
+            }
+        });
+    }
+
+    //搜索查看用户绩效
+    function getDataStr() {
+        $.ajax({
+            type: "POST",
+            url: "/performance/getUserPerformanceData",
+            data: {
+                "tUserId": temp
+            },
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            success: function (data) {//返回数据根据结果进行相应的处理
+                wpActualPerformance = data.wpActualPerformance;
+                unfinished =  data.wpProspectPerformance- data.wpActualPerformance;
+                msalary = data.m_salary;
+                res=data.y_salary-data.m_salary
+                $("#week").attr("class", "");
+                $("#year").attr("class", "");
+                $("#month").attr("class", "active");
+                performance();
+            },
+            error: function () {
+                alert("返回消息失败");
+            }
+        });
+    }
+
+    //饼状图
+    function performance() {
+        var ring = echarts.init(document.getElementById('main1'));
+        var labelTop = {
+            normal : {
+                label : {
+                    show : true,
+                    position : 'center',
+                    formatter: '{d}%\n{b}',
+                    textStyle: {
+                        baseline : 'bottom'
+                    }
+                },
+                labelLine : {
+                    show : false
+                }
+            }
+        };
+
+        var labelFromatter = {
+            normal : {
+                label : {
+                    textStyle: {
+                        baseline : 'top'
+                    }
+                }
+            },
+        }
+        var labelBottom = {
+            normal : {
+                // 灰色未完成
+                color: '#ccc',
+                label : {
+                    show : false,
+                    position : 'center'
+                },
+                labelLine : {
+                    show : false
+                }
+            },
+             emphasis: {
+                 color: 'rgba(0,0,0,0)'
+             }
+        };
+        var radius = [40, 55];
+        ring.setOption({
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)",
+                color:'#000',
+                textStyle:{
+                    color:"#e9e9e9",
+                }
+            },
+            color:["#91DD6A","#59B9EC","#FFD133"],
+            series : [
+                {
+                    type : 'pie',
+                    center : ['15%', '58%'],
+                    radius : radius,
+                    x: '0%',
+                    itemStyle : labelFromatter,
+                    data : [
+                        {name:'未完成', value:unfinished, itemStyle : labelBottom},
+                        {name:'工作效率', value:wpActualPerformance,itemStyle : labelTop}
+                    ]
+                },
+                {
+                    type : 'pie',
+                    center : ['45%', '58%'],
+                    radius : radius,
+                    x:'20%',
+                    itemStyle : labelFromatter,
+                    data : [
+                        {name:'other', value:res, itemStyle : labelBottom},
+                        {name:'人力成本', value:msalary,itemStyle : labelTop}
+                    ]
+                },
+                {
+                    type : 'pie',
+                    center : ['75%', '58%'],
+                    radius : radius,
+                    x:'40%',
+                    itemStyle : labelFromatter,
+                    data : [
+                        {name:'other', value:70, itemStyle : labelBottom},
+                        {name:'销售金额', value:30,itemStyle : labelTop}
+                    ]
+                }
+            ]
+        }) ;
+    }
+</script>
+</html>

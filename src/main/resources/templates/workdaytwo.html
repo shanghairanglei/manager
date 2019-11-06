@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>工作日计划查阅</title>
+		<link href="/static/css/bootstrap.css" rel="stylesheet" />
+		<link href="/static/css/nav.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/workdaytwo.css"/>
+		<script src="/static/js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/static/js/jquery-1.10.2.js"></script>
+		<script src="/static/js/bootstrap.min.js"></script>
+	</head>
+<body>
+    <div id="wrapper">
+		<!-- top -->
+        <nav class="navbar top-navbar base-index" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"><img src="/static/img/logo.jpg" class="logo"></a>
+            </div>
+        	<p class="navbar-text .visible-xs-block">早上好，欢迎来到让雷科技</p>
+        	<ul class="nav navbar-nav navbar-right base-nav">
+        		<li><a href=""  class="timeaa"><span class="iconfont">&#xe697;</span></a></li>
+				<li><a th:href="@{'/performance/personalCenter?tUserId='+${session.user.tUserId}+'&roleId='+${session.roleId}}"><span class="iconfont">&#xe686;</span> 我的绩效</a></li>
+        		<li><a href="#"><img th:src="@{${session.user.img}}" style="border-radius: 50%; width: 30px;height: 30px;margin-right: 10px;">个人中心</a></li>
+        	</ul>
+			<div class="Crumbs">
+				<ul class="breadcrumb">
+					<li><a href="#">让雷科技</a></li>
+					<li class="active">工作日计划</li>
+				</ul>
+			</div>
+        </nav>
+        <nav class=" navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+					<li>
+						<a class="active-menu" href="/upload/findWork"><span class="iconfont">&#xe791;</span>
+							<cite>计划总结</cite></a>
+					</li>
+					<li>
+						<a class="active-menu" href="/workplan/go"><span class="iconfont">&#xe697;</span> <cite>工作计划</cite></a>
+					</li>
+					<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 3) or (${session.roleId} eq 5)">
+						<a class="active-menu" href="/performance/checkRole"><span class="iconfont">&#xe686;</span>
+							<cite>绩效统计</cite></a>
+					</li>
+					<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 5)">
+						<a class="active-menu" href="/user/go"><span class="iconfont">&#xe68f;</span>
+							<cite>人员管理</cite></a>
+					</li>
+					<li>
+						<a class="active-menu" href="/team/go"><span class="glyphicon glyphicon-user"></span>
+							<cite>团队介绍</cite></a>
+					</li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+            <div id="page-inner">
+				<div class="row">
+
+				</div>
+                <div class="row">
+					<div class="col-md-9 col-sm-12 col-xs-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="col-md-3">
+									  所属部门
+									  <select class="form-control upoad1">
+										<option>电商运营部</option>
+										<option>市场部</option>
+										<option>财务部</option>
+									   </select>
+								</div>
+								<div class="col-md-6">
+									  姓名
+									  <input type="text" class="form-control" id="name" placeholder="翁少锋">
+								</div>
+								<div class="col-md-2">
+									<input type="submit" class="submit1" id="" value="查看">
+								</div>
+							</div>
+							<div class="panel-body">
+								<table class="table">
+									   <thead>
+										  <tr>
+											 <th>姓名</th>
+											 <th>部门</th>
+											 <th>计划标题</th>
+											 <th>绩效点</th>
+											 <th>上传时间</th>
+											 <th>操作</th>
+										  </tr>
+									   </thead>
+									   <tbody>
+										  <tr>
+										  	<td>李静</td>
+										  	<td>电商运营</td>
+										  	<td>2019.08.08工作计划</td>
+										  	<td>10</td>
+										  	<td>2019.08.08</td>
+										  	<td>
+												 <button><span class="iconfont">&#xe61a;</span></button>
+										  	</td>
+										  </tr>
+										  <tr>
+										  	<td>李静</td>
+										  	<td>电商运营</td>
+										  	<td>2019.08.08工作计划</td>
+										  	<td>10</td>
+										  	<td>2019.08.08</td>
+										  	<td>
+												 <button><span class="iconfont">&#xe61a;</span></button>
+										  	</td>
+										  </tr>
+											<tr>
+												<td>李静</td>
+												<td>电商运营</td>
+												<td>2019.08.08工作计划</td>
+												<td>10</td>
+												<td>2019.08.08</td>
+												<td>
+													 <button><span class="iconfont">&#xe61a;</span></button>
+												</td>
+											</tr>
+										  <tr>
+										  	<td>李静</td>
+										  	<td>电商运营</td>
+										  	<td>2019.08.08工作计划</td>
+										  	<td>10</td>
+										  	<td>2019.08.08</td>
+										  	<td>
+												 <button><span class="iconfont">&#xe61a;</span></button>
+										  	</td>
+										  </tr>
+									   </tbody>
+									</table>
+									<div class=" col-xs-12 col-sm-3 col-sm-offset-9">
+										<ul class="pagination">
+											<li><a href="#">«</a></li>
+											<li><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											<li><a href="#">4</a></li>
+											<li><a href="#">5</a></li>
+											<li><a href="#">»</a></li>
+										</ul>
+									</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div class="right">
+							<div class="row" th:each="user,state:${userList}">
+								<div class="col-xs-12">
+									<div class="col-xs-1">
+										<img th:src="@{${user.img}}" class="img-circle">
+									</div>
+									<div class="col-xs-8">
+										<ul class="right-font">
+											<li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
+											<li th:text="${user.userpost}">UI工程师</li>
+										</ul>
+									</div>
+									<div class="col-xs-2">
+										<a th:href="@{'#'+${state.count}}" aria-expanded="false" data-toggle="collapse"
+										   class="collapsed">
+											<font style="vertical-align: inherit;">
+                                            <span class="iconfont right-span tooltip-show" data-toggle="tooltip"
+												  title="点击展开" data-placement="bottom">&#xe64b;</span>
+											</font>
+										</a>
+									</div>
+								</div>
+								<div class="col-xs-12">
+									<ul th:id="${state.count}" class="list-unstyled collapse" style="">
+											<p class="brief-introduction" th:text="${user.description}">白少</p>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+	<script src="/static/js/message.js" type="text/javascript" charset="utf-8"></script>
+</html>

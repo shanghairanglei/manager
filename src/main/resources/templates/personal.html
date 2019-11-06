@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>个人中心</title>
+	<link href="/static/css/bootstrap.css" rel="stylesheet" />
+	<link href="/static/css/nav.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/personal.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/base.css" />
+	<script src="/static/js/jquery-1.10.2.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/personal.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<script type="text/javascript">
+    //检查图片
+    function checkImage(obj) {
+//        // 1. 创建一个读取文件的对象
+//        var fileReader = new FileReader();
+//        //读取所选文件,需要一定时间
+//        fileReader.readAsDataURL(this.files[0]);
+//        fileReader.onload = function () {
+//            // 2. 读完文件后再讲图片加载到img标签中
+//            $("#image").attr("src", fileReader.result);
+//        };
+        var file=$(obj)[0].files[0];    //获取文件信息
+        var imgdata='';
+        if(file)
+        {
+            var reader=new FileReader();  //调用FileReader
+            reader.readAsDataURL(file); //将文件读取为 DataURL(base64)
+            reader.onload=function(evt){   //读取操作完成时触发。
+                $("#img").attr('src',evt.target.result)  //将img标签的src绑定为DataURL
+            };
+        }
+        else{
+            alert("上传失败");
+        }
+    }
+
+    //预览图片
+    function onLoadImage(){
+//        var file=$('#filename').get(0).files[0];
+//        var reader = new FileReader();
+//        //将文件以Data URL形式读入页面
+//        reader.readAsDataURL(file);
+//        $("#onLoadImage").html('<img src="' + this.result +'" alt="" />');
+    }
+
+    function checkSubmit() {
+        var formdata=new FormData();
+        formdata.append('fileName',$('#filename').get(0).files[0]);
+        if (document.getElementById("filename").value == '') {
+            alert("请选择上传的图片");
+            return false;
+        }
+        $.ajax({
+            async: false,
+            type: 'POST',
+            url: "/personal/UploadImg",
+            dataType: 'json',
+            data: formdata,
+            contentType:false,//ajax上传图片需要添加
+            processData:false,//ajax上传图片需要添加
+            success: function (data) {
+                if (data.result=="图片上传成功") {
+                    alert('上传成功');
+                    window.location.reload(true);
+                }
+            },
+            error: function () {
+                alert("上传失败");
+            }
+        })
+    }
+
+	//修改简介
+    function profile(){
+        var newDescription = $("#profile").val();
+        var tUserId = $("#profileId").text();
+        $.ajax({
+            type: "POST",
+            url: "/personal/UpdateProfile",
+            data: {
+                "newDescription": newDescription,
+                "tUserId": tUserId
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.profile == 1) {
+                    alert('修改成功');
+                    window.location.reload(true);
+                }
+
+            },
+            error: function () {
+               alert('修改失败');
+            }
+        });
+	}
+
+	//修改密码
+    function updatePwd() {
+        var password = $("#password").val();
+        var newPassword = $("#newPassword").val();
+        var conPassword = $("#conPassword").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/personal/UpdatePassWord",
+            data: {
+                "password": password,
+                "newPassword": newPassword,
+                "conPassword": conPassword
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.msg == 1) {
+                alert('修改成功，请重新登录!');
+            }else {
+                    alert(data.msg);
+				}
+            },
+            error: function (data) {
+                   alert(data.msg.toString);
+            }
+        });
+    }
+
+
+    function save() {
+        var tUserId = $("#profileId").text();
+        var school = $("#school").val();
+        var education = $("#education").val();
+        var profession = $("#profession").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/personal/updateEducation",
+            data: {
+                "tUserId": tUserId,
+                "school": school,
+                "education": education,
+				"profession": profession
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.education == 1) {
+                    alert('修改成功');
+                    window.location.reload(true);
+                }
+            },
+            error: function () {
+                alert('修改失败');
+            }
+        });
+    }
+
+    function saveExpe() {
+        var tUserId = $("#profileId").text();
+        var company = $("#company").val();
+        var cResponsibility = $("#cResponsibility").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/personal/updateExperience",
+            data: {
+                "tUserId": tUserId,
+                "company": company,
+                "cResponsibility": cResponsibility
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.experience == 1) {
+                    alert('修改成功');
+                    window.location.reload(true);
+                }
+            },
+            error: function () {
+                alert('修改失败');
+            }
+        });
+    }
+
+    //修改项目
+	function saveProject() {
+        var tUserId = $("#profileId").text();
+        var pName = $("#pName").val();
+        var pRole = $("#pRole").val();
+        var pIntro = $("#pIntro").val()
+        var pCompany = $("#pCompany").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/personal/updateProject",
+            data: {
+                "tUserId": tUserId,
+                "pName": pName,
+                "pRole": pRole,
+                "pIntro": pIntro,
+                "pCompany": pCompany
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.project == 1) {
+                    alert('修改成功');
+                    window.location.reload(true);
+                }
+            },
+            error: function () {
+                alert('修改失败');
+            }
+        });
+    }
+
+    function seeExperience() {
+        var tUserId = $("#profileId").text();
+
+        $.ajax({
+            type: "POST",
+            url: "/personal/selectExperience",
+            data: {
+                "tUserId": tUserId
+            },
+            dataType: "json",
+            contentType : "application/x-www-form-urlencoded",
+            success: function (data) {
+//                $("input[name='company']").attr("value",data.experience.company);
+//                $("input[name='cStarttime']").attr("value",data.experience.cStarttime);
+//                $("input[name='cResponsibility']").attr("value",data.experience.cResponsibility);
+            },
+            error:function () {
+                alert("返回消息失败")
+            }
+        });
+    }
+
+
+    function see() {
+        var tUserId = $("#profileId").text();
+
+        $.ajax({
+            type: "POST",
+            url: "/personal/selectEducation",
+            data: {
+                "tUserId": tUserId
+            },
+            dataType: "json",
+            contentType : "application/x-www-form-urlencoded",
+            success: function (data) {
+                $("input[name='school']").attr("value",data.eduProHobbyVo.school);
+                if(data.eduProHobbyVo.education==0){
+                    $("input[name='education']").attr("value","0");
+                    $("#id0").attr("selected","selected");
+                }else if(data.eduProHobbyVo.education==1){
+                    $("input[name='education']").attr("value","1");
+                    $("#id1").attr("selected","selected");
+                }else if(data.eduProHobbyVo.education==2){
+                    $("input[name='education']").attr("value","2");
+                    $("#id2").attr("selected","selected");
+                }else if(data.eduProHobbyVo.education==3){
+                    $("input[name='education']").attr("value","3");
+                    $("#id3").attr("selected","selected");
+                }else if(data.eduProHobbyVo.education==4){
+                    $("input[name='education']").attr("value","4");
+                    $("#id4").attr("selected","selected");
+                }else if(data.eduProHobbyVo.education==5){
+                    $("input[name='education']").attr("value","5");
+                    $("#id5").attr("selected","selected");
+                }else if(data.eduProHobbyVo.education==6) {
+                    $("input[name='education']").attr("value", "6");
+                    $("#id6").attr("selected","selected");
+                }
+                $("input[name='profession']").attr("value",data.eduProHobbyVo.profession);
+                $("input[name='sStarttime']").attr("value",data.eduProHobbyVo.sStarttime);
+                $("input[name='sEndtime']").attr("value",data.eduProHobbyVo.sEndtime);
+            },
+            error:function () {
+                alert("返回消息失败")
+            }
+        });
+    }
+</script>
+<body>
+<div id="wrapper">
+	<!-- top -->
+	<nav class="navbar top-navbar base-index" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand"><img src="/static/img/logo.jpg" class="logo"></a>
+		</div>
+		<p class="navbar-text .visible-xs-block">早上好，欢迎来到让雷科技  !</p>
+		<ul class="nav navbar-nav navbar-right base-nav">
+			<li><a href="" class="timeaa"><span class="iconfont">&#xe663;</span></a></li>
+			<li><a th:href="@{'/performance/personalCenter?tUserId='+${session.user.tUserId}+'&roleId='+${session.roleId}}"><span class="iconfont">&#xe647;</span> 我的绩效</a></li>
+			<li>
+				<a href="/personal/go"><img th:src="@{${session.user.img}}" style="border-radius: 50%; width: 30px;height: 30px;margin-right: 10px;">个人中心</a>
+			</li>
+		</ul>
+		<div class="Crumbs">
+			<ul class="breadcrumb">
+				<li><a href="#">让雷科技</a></li>
+				<li class="active">个人中心</li>
+			</ul>
+		</div>
+	</nav>
+	<!--/. NAV TOP  -->
+	<nav class=" navbar-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav" id="main-menu">
+				<li>
+					<a class="active-menu" href="/upload/findWork"><span class="iconfont">&#xe64f;</span>
+						<cite>计划总结</cite></a>
+				</li>
+				<li>
+					<a class="active-menu" href="/workplan/go"><span class="iconfont">&#xe663;</span> <cite>工作计划</cite></a>
+				</li>
+				<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 3) or (${session.roleId} eq 5)">
+					<a class="active-menu" href="/performance/checkRole"><span class="iconfont">&#xe647;</span>
+						<cite>绩效统计</cite></a>
+				</li>
+				<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 5)">
+					<a class="active-menu" href="/user/go"><span class="iconfont">&#xe68f;</span>
+						<cite>人员管理</cite></a>
+				</li>
+				<li>
+					<a class="active-menu" href="/team/go"><span class="iconfont">&#xe610;</span>
+						<cite>团队介绍</cite></a>
+				</li>
+			</ul>
+
+		</div>
+
+	</nav>
+	<!-- /. NAV SIDE  -->
+	<div id="page-wrapper">
+		<div id="page-inner">
+			<div class="row">
+
+			</div>
+			<div class="row">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="panel panel-default">
+						<div class="row top">
+							<div class="col-sm-2">
+								<dl class="dl-horizontal">
+									<dt class="plan"><a href="">个人资料</a></dt>
+								</dl>
+							</div>
+							<div class="col-sm-10 col-lg-10 col-md-10 col-xs-12">
+								<ul class="data-nav">
+									<li class="activeb">基本资料</li>
+									<li class="">兴趣爱好</li>
+									<li class="">教育背景</li>
+									<li class="">工作背景</li>
+									<li class="">项目经历</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="row top2">
+							<div class="personal">
+								<div class="text-right">
+									<button class="submit1"  data-toggle="modal" data-target="#myModal_0">修改</button>
+								</div>
+								<div class="">
+									<img th:src="@{${session.user.img}}" class="center-block head">
+								</div>
+								<div class="text-center">
+									<div class="page-header">
+										<h4 th:text="${session.user.name}">翁少锋
+											<small><button class="modify">修改</button></small>
+										</h4>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="modal fade" id="myModal_0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+													aria-hidden="true">×
+											</button>
+											<h4 class="modal-title">
+												基本信息
+											</h4>
+										</div>
+										<div class="modal-body">
+											<div class="row">
+												<img th:src="@{${session.user.img}}" id="img" class="center-block head" alt="">
+											</div>
+											<div class="row">
+												<a class="file"><input type="file" name="fileName" id="filename" accept="image/png, image/jpeg, image/jpg" onchange="checkImage(this)">上传图片</a>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+													data-dismiss="modal">关闭
+											</button>
+											<input type="button" id="submitBtn" class="btn btn-primary Modal-submission" value="上传" onclick="checkSubmit()">
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="showImage"></div>
+							<div id="onLoadImage"></div>
+
+							<div class="personal">
+								<p class="text-left">基本信息</p>
+								<div class="text-right">
+									<button class="submit1"  onclick="profile()">保存</button>
+									<!--<input type="button" class="submit1"  value="" >-->
+								</div>
+								<div class="ff">
+									<!-- <form action="" method="post" class="form-horizontal" role="form"> -->
+									<ul class="information">
+										<li class="information-left" >手机号：</li>
+										<li th:text="${session.user.phone}"></li>
+									</ul>
+									<ul class="information">
+										<li class="information-left" >邮箱：</li>
+										<li th:text="${session.user.email}"></li>
+									</ul>
+									<ul class="information">
+										<li class="information-left" >性别：</li>
+										<li th:text="${session.user.email}"></li>
+									</ul>
+									<ul class="information">
+										<li class="information-left" >个人简介：</li>
+										<p th:text="${session.user.tUserId}" id="profileId" hidden>11</p>
+										<li><textarea class="wenben" rows="3" th:text="${dbuser.description}" id="profile"></textarea></li>
+									</ul>
+									<!-- </form> -->
+								</div>
+							</div>
+						</div>
+						<div class="row top3">
+							<div class="personal">
+								<p class="text-left">兴趣爱好</p>
+								<div class="row">
+									<ul class="live" th:each="list : ${hobby}">
+										<li th:text="${list.hobby}">摄影</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="row top4">
+							<div class="personal">
+								<p class="text-left">教育背景</p>
+								<div class="text-right">
+									<button class="submit1" data-toggle="modal" data-target="#myModal_1" onclick="see()">修改</button>
+								</div>
+								<div class="ff">
+									<ul class="information" th:each="list : ${education}">
+										<li class="information-left">所在学校：</li>
+										<li th:text="${list.school}"></li>
+									</ul>
+									<ul class="information" th:each="list : ${education}">
+										<li class="information-left">所学专业：</li>
+										<li th:text="${list.profession}"></li>
+									</ul>
+									<ul class="information" th:each="list : ${education}">
+										<li class="information-left">最高学历：</li>
+										<li>
+											<small th:if="${list.education} eq 0">小学</small>
+											<small th:if="${list.education} eq 1">初中</small>
+											<small th:if="${list.education} eq 2">高中</small>
+											<small th:if="${list.education} eq 3">大专</small>
+											<small th:if="${list.education} eq 4">本科</small>
+											<small th:if="${list.education} eq 5">硕士</small>
+											<small th:if="${list.education} eq 6">博士</small>
+										</li>
+									</ul>
+									<!--<div class="information" th:each="list : ${education}">-->
+										<!--<li class="information-left" >时间：</li>-->
+										<!--<li th:text="${list.sStarttime}"></li>-->
+									<!--</div>-->
+								</div>
+							</div>
+						</div>
+						<!--修改教育背景模态框-->
+						<div class="modal fade" id="myModal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">×
+										</button>
+										<h4 class="modal-title" id="myModalLabel">
+											教育背景
+										</h4>
+									</div>
+									<p th:text="${session.user.tUserId}" id="dela" name="tUserId" hidden>2</p>
+									<div class="modal-body">
+										<div class="row">
+											<label class="col-xs-4">学校：</label>
+											<input type="text" class="col-xs-6 form-control Modal " name="school" id="school" placeholder="">
+										</div>
+										<div class="row">
+											<label class="col-xs-4">专业：</label>
+											<input type="text" class="col-xs-6 form-control Modal " name="profession" id="profession" placeholder="">
+										</div>
+										<div class="row">
+											<label class="col-xs-4">学历：</label>
+											<select class="form-control col-xs-6 Modal" name="education" id="education" >
+												<option value="0" id="id0">小学</option>
+												<option value="1" id="id1">初中</option>
+												<option value="2" id="id2">高中</option>
+												<option value="3" id="id3">大专</option>
+												<option value="4" id="id4">本科</option>
+												<option value="5" id="id5">硕士</option>
+												<option value="6" id="id6">博士</option>
+											</select>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+												data-dismiss="modal">关闭
+										</button>
+										<input type="button" class="btn btn-primary Modal-submission" value="保存" onclick="save()">
+									</div>
+								</div>
+							</div>
+						</div><!-- /.modal -->
+
+						<div class="row top5">
+							<div class="personal">
+								<p class="text-left">工作经历</p>
+								<div class="text-right">
+									<button class="submit1" data-toggle="modal" data-target="#myModal_2" onclick="seeExperience()">修改</button>
+								</div>
+								<div class="ff">
+									<ul class="information" th:each="list : ${experience}">
+										<li class="information-left" >服务公司：</li>
+										<li th:text="${list.company}"></li>
+									</ul>
+									<ul class="information" th:each="list : ${experience}">
+										<li class="information-left" >担任职位：</li>
+										<li th:text="${list.cResponsibility}"></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="row top6">
+							<div class="personal">
+								<p class="text-left">项目经历</p>
+								<div class="text-right">
+									<button class="submit1" data-toggle="modal" data-target="#myModal_3">修改</button>
+								</div>
+								<div class="ff" >
+									<ul class="information" th:each="list : ${project}">
+										<li class="information-left">项目名称：</li>
+										<li th:text="${list.pName}"></li>
+									</ul>
+									<ul class="information1" th:each="list : ${project}">
+										<li class="information-left" >项目经历：</li>
+										<li th:text="${list.pIntro}"></li>
+									</ul>
+									<ul class="information1" th:each="list : ${project}">
+										<li class="information-left" >个人职责：</li>
+										<li th:text="${list.pRole}"></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="myModal_2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">×
+										</button>
+										<h4 class="modal-title" id="">
+											工作经历
+										</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<label class="col-xs-4">服务公司：</label>
+											<input type="text" class="col-xs-6 form-control Modal" placeholder="" name="company" id="company">
+										</div>
+										<div class="row">
+											<label class="col-xs-4">职位：</label>
+											<input type="text" class="col-xs-6 form-control Modal" placeholder="" name="cResponsibility" id="cResponsibility">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+												data-dismiss="modal">关闭
+										</button>
+										<input type="button" class="btn btn-primary Modal-submission" value="保存" onclick="saveExpe()">
+									</div>
+								</div>
+							</div>
+						</div><!-- /.modal -->
+						<div class="modal fade" id="myModal_3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">×
+										</button>
+										<h4 class="modal-title">
+											项目经历
+										</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<label class="col-xs-4">项目名称：</label>
+											<input type="text" class="col-xs-6 form-control Modal" placeholder="" name="pName" id="pName">
+										</div>
+										<div class="row">
+											<label class="col-xs-4">个人职责：</label>
+											<input type="text" class="col-xs-6 form-control Modal" placeholder="" name="pRole" id="pRole">
+										</div>
+										<div class="row">
+											<label class="col-xs-4">项目经历：</label>
+											<input type="text" class="col-xs-6 form-control Modal" placeholder="" name="pIntro" id="pIntro">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+												data-dismiss="modal">关闭
+										</button>
+										<input type="button" class="btn btn-primary Modal-submission" value="保存" onclick="saveProject()">
+									</div>
+								</div>
+							</div>
+						</div><!-- /.modal -->
+					</div>
+				</div>
+
+
+
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="right">
+						<div class="row" th:each="user,state:${userList}">
+							<div class="col-xs-12">
+								<div class="col-xs-1">
+									<img th:src="@{${user.img}}" class="img-circle">
+								</div>
+								<div class="col-xs-8">
+									<ul class="right-font">
+										<li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
+										<li th:text="${user.userpost}">UI工程师</li>
+									</ul>
+								</div>
+								<div class="col-xs-2">
+									<a th:href="@{'#'+${state.count}}" aria-expanded="false" data-toggle="collapse"
+									   class="collapsed">
+										<font style="vertical-align: inherit;">
+                                            <span class="iconfont right-span tooltip-show" data-toggle="tooltip"
+												  title="点击展开" data-placement="bottom">&#xe64b;</span>
+										</font>
+									</a>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<ul th:id="${state.count}" class="list-unstyled collapse" style="">
+										<p class="brief-introduction" th:text="${user.description}">白少</p>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="/static/js/message.js" type="text/javascript" charset="utf-8"></script>
+</html>

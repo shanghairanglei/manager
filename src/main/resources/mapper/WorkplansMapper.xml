@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.WorkplansMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.Workplans">
+    <id column="wp_id" jdbcType="INTEGER" property="wpId" />
+    <result column="wp_name" jdbcType="VARCHAR" property="wpName" />
+    <result column="wp_startTime" jdbcType="TIMESTAMP" property="wpStarttime" />
+    <result column="wp_endTime" jdbcType="TIMESTAMP" property="wpEndtime" />
+    <result column="wp_content" jdbcType="VARCHAR" property="wpContent" />
+    <result column="wp_keypoint" jdbcType="INTEGER" property="wpKeypoint" />
+    <result column="wp_prospect_performance" jdbcType="INTEGER" property="wpProspectPerformance" />
+    <result column="wp_actual_performance" jdbcType="INTEGER" property="wpActualPerformance" />
+    <result column="wp_remark" jdbcType="VARCHAR" property="wpRemark" />
+    <result column="wp_createDate" jdbcType="TIMESTAMP" property="wpCreatedate" />
+    <result column="wp_status" jdbcType="INTEGER" property="wpStatus" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="file_id" jdbcType="INTEGER" property="fileId" />
+    <result column="check_point" jdbcType="INTEGER" property="checkPoint" />
+    <result column="if_summary" jdbcType="INTEGER" property="ifSummary" />
+  </resultMap>
+  <resultMap id="BaseResultMaps" type="com.rl.vo.UserWorkPlans">
+    <id column="wp_id" jdbcType="INTEGER" property="wpId" />
+    <result column="wp_name" jdbcType="VARCHAR" property="wpName" />
+    <result column="wp_startTime" jdbcType="TIMESTAMP" property="wpStarttime" />
+    <result column="wp_endTime" jdbcType="TIMESTAMP" property="wpEndtime" />
+    <result column="wp_content" jdbcType="VARCHAR" property="wpContent" />
+    <result column="wp_keypoint" jdbcType="INTEGER" property="wpKeypoint" />
+    <result column="wp_prospect_performance" jdbcType="INTEGER" property="wpProspectPerformance" />
+    <result column="wp_actual_performance" jdbcType="INTEGER" property="wpActualPerformance" />
+    <result column="wp_remark" jdbcType="VARCHAR" property="wpRemark" />
+    <result column="wp_createDate" jdbcType="TIMESTAMP" property="wpCreatedate" />
+    <result column="wp_status" jdbcType="INTEGER" property="wpStatus" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="file_id" jdbcType="INTEGER" property="fileId" />
+    <result column="check_point" jdbcType="INTEGER" property="checkPoint" />
+    <result column="if_summary" jdbcType="INTEGER" property="ifSummary" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+
+  <resultMap id="Base" type="com.rl.dto.Summary">
+    <result column="wp_name" jdbcType="VARCHAR" property="wpName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="wp_createDate" jdbcType="TIMESTAMP" property="wpCreatedate" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+  </resultMap>
+
+  <select id="findOneWork" resultMap="BaseResultMaps">
+    select r.wp_id,
+    r.wp_name,
+    r.wp_startTime,
+    r.wp_endTime,
+    r.wp_content,
+    r.wp_keypoint,
+    r.wp_prospect_performance,
+    r.wp_actual_performance,
+    r.wp_remark,
+    r.wp_createDate,
+    r.wp_status,
+    r.t_user_id,
+    r.file_id,
+    r.check_point,
+    r.if_summary,
+    t.name from rl_workplans r join t_user t on r.t_user_id = t.t_user_id
+    where r.wp_id = #{wpId}
+  </select>
+  <sql id="Base_Column_List">
+    wp_id, wp_name, wp_startTime, wp_endTime, wp_content, wp_keypoint, wp_prospect_performance, 
+    wp_actual_performance, wp_remark, wp_createDate, wp_status, t_user_id, file_id, check_point, 
+    if_summary
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rl_workplans
+    where wp_id = #{wpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rl_workplans
+    where wp_id = #{wpId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rl.model.Workplans">
+    insert into rl_workplans (wp_id, wp_name, wp_startTime, 
+      wp_endTime, wp_content, wp_keypoint, 
+      wp_prospect_performance, wp_actual_performance, 
+      wp_remark, wp_createDate, wp_status, 
+      t_user_id, file_id, check_point, 
+      if_summary)
+    values (#{wpId,jdbcType=INTEGER}, #{wpName,jdbcType=VARCHAR}, #{wpStarttime,jdbcType=TIMESTAMP}, 
+      #{wpEndtime,jdbcType=TIMESTAMP}, #{wpContent,jdbcType=VARCHAR}, #{wpKeypoint,jdbcType=INTEGER}, 
+      #{wpProspectPerformance,jdbcType=INTEGER}, #{wpActualPerformance,jdbcType=INTEGER}, 
+      #{wpRemark,jdbcType=VARCHAR}, #{wpCreatedate,jdbcType=TIMESTAMP}, #{wpStatus,jdbcType=INTEGER}, 
+      #{tUserId,jdbcType=VARCHAR}, #{fileId,jdbcType=INTEGER}, #{checkPoint,jdbcType=INTEGER}, 
+      #{ifSummary,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.model.Workplans">
+    insert into rl_workplans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wpId != null">
+        wp_id,
+      </if>
+      <if test="wpName != null">
+        wp_name,
+      </if>
+      <if test="wpStarttime != null">
+        wp_startTime,
+      </if>
+      <if test="wpEndtime != null">
+        wp_endTime,
+      </if>
+      <if test="wpContent != null">
+        wp_content,
+      </if>
+      <if test="wpKeypoint != null">
+        wp_keypoint,
+      </if>
+      <if test="wpProspectPerformance != null">
+        wp_prospect_performance,
+      </if>
+      <if test="wpActualPerformance != null">
+        wp_actual_performance,
+      </if>
+      <if test="wpRemark != null">
+        wp_remark,
+      </if>
+      <if test="wpCreatedate != null">
+        wp_createDate,
+      </if>
+      <if test="wpStatus != null">
+        wp_status,
+      </if>
+      <if test="tUserId != null">
+        t_user_id,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="checkPoint != null">
+        check_point,
+      </if>
+      <if test="ifSummary != null">
+        if_summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wpId != null">
+        #{wpId,jdbcType=INTEGER},
+      </if>
+      <if test="wpName != null">
+        #{wpName,jdbcType=VARCHAR},
+      </if>
+      <if test="wpStarttime != null">
+        #{wpStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wpEndtime != null">
+        #{wpEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wpContent != null">
+        #{wpContent,jdbcType=VARCHAR},
+      </if>
+      <if test="wpKeypoint != null">
+        #{wpKeypoint,jdbcType=INTEGER},
+      </if>
+      <if test="wpProspectPerformance != null">
+        #{wpProspectPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="wpActualPerformance != null">
+        #{wpActualPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="wpRemark != null">
+        #{wpRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="wpCreatedate != null">
+        #{wpCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wpStatus != null">
+        #{wpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="tUserId != null">
+        #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPoint != null">
+        #{checkPoint,jdbcType=INTEGER},
+      </if>
+      <if test="ifSummary != null">
+        #{ifSummary,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rl.model.Workplans">
+    update rl_workplans
+    <set>
+      <if test="wpName != null">
+        wp_name = #{wpName,jdbcType=VARCHAR},
+      </if>
+      <if test="wpStarttime != null">
+        wp_startTime = #{wpStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wpEndtime != null">
+        wp_endTime = #{wpEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wpContent != null">
+        wp_content = #{wpContent,jdbcType=VARCHAR},
+      </if>
+      <if test="wpKeypoint != null">
+        wp_keypoint = #{wpKeypoint,jdbcType=INTEGER},
+      </if>
+      <if test="wpProspectPerformance != null">
+        wp_prospect_performance = #{wpProspectPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="wpActualPerformance != null">
+        wp_actual_performance = #{wpActualPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="wpRemark != null">
+        wp_remark = #{wpRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="wpCreatedate != null">
+        wp_createDate = #{wpCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wpStatus != null">
+        wp_status = #{wpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="tUserId != null">
+        t_user_id = #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPoint != null">
+        check_point = #{checkPoint,jdbcType=INTEGER},
+      </if>
+      <if test="ifSummary != null">
+        if_summary = #{ifSummary,jdbcType=INTEGER},
+      </if>
+    </set>
+    where wp_id = #{wpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rl.model.Workplans">
+    update rl_workplans
+    set wp_name = #{wpName,jdbcType=VARCHAR},
+      wp_startTime = #{wpStarttime,jdbcType=TIMESTAMP},
+      wp_endTime = #{wpEndtime,jdbcType=TIMESTAMP},
+      wp_content = #{wpContent,jdbcType=VARCHAR},
+      wp_keypoint = #{wpKeypoint,jdbcType=INTEGER},
+      wp_prospect_performance = #{wpProspectPerformance,jdbcType=INTEGER},
+      wp_actual_performance = #{wpActualPerformance,jdbcType=INTEGER},
+      wp_remark = #{wpRemark,jdbcType=VARCHAR},
+      wp_createDate = #{wpCreatedate,jdbcType=TIMESTAMP},
+      wp_status = #{wpStatus,jdbcType=INTEGER},
+      t_user_id = #{tUserId,jdbcType=VARCHAR},
+      file_id = #{fileId,jdbcType=INTEGER},
+      check_point = #{checkPoint,jdbcType=INTEGER},
+      if_summary = #{ifSummary,jdbcType=INTEGER}
+    where wp_id = #{wpId,jdbcType=INTEGER}
+  </update>
+  <select id="findByDateDept" resultType="com.rl.model.Workplans">
+    select
+    w.wp_id,
+    w.wp_name,
+    w.wp_startTime
+    ,w.wp_endTime,
+    w.wp_content,w.wp_keypoint,
+    w.wp_prospect_performance,
+    w.wp_actual_performance,
+    w.wp_remark,
+    w.wp_createDate,
+    w.wp_status,
+    w.t_user_id,
+    w.file_id,
+    u.dept_id,
+    u.t_user_id
+from rl_workplans w join t_user u on w.t_user_id = u.t_user_id
+where w.wp_createDate = #{wp_createDate} and u.dept_id = #{deptId}
+  </select>
+  <select id="findWorkByIdNameDate" parameterType="String" resultMap="Base">
+    select
+    w.wp_name,
+    w.wp_createDate,
+    w.t_user_id,
+    u.name
+    from rl_workplans w join t_user u on w.t_user_id = u.t_user_id
+     where 1=1
+    <if test="wpName != null">
+      and w.wp_name  like '%${wpName}%'
+    </if>
+    <if test="file_createDate1 != null and file_createDate2 != null">
+      and w.wp_createDate between #{file_createDate1} and #{file_createDate2} and u.status=1 GROUP BY w.wp_name ORDER
+      BY  w.wp_createDate DESC
+    </if>
+  </select>
+  <select id="findAllWorkById" resultMap="BaseResultMaps">
+    select w.wp_id,
+            w.wp_name,
+            w.wp_startTime,
+            w.wp_endTime,
+            w.wp_content,
+            w.wp_keypoint,
+            w.wp_prospect_performance,
+            w.wp_actual_performance,
+            w.wp_remark,
+            w.wp_createDate,
+            w.wp_status,
+            w.t_user_id,
+            w.file_id,
+            w.check_point,
+            w.if_summary,
+            u.name
+    from rl_workplans w join t_user u on w.t_user_id = u.t_user_id WHERE  w.t_user_id=#{t_user_id} order by w.wp_createDate desc
+  </select>
+  <select id="findAllWork" resultMap="BaseResultMaps">
+            select
+            w.wp_id,
+            w.wp_name,
+            w.wp_startTime,
+            w.wp_endTime,
+            w.wp_content,
+            w.wp_keypoint,
+            w.wp_prospect_performance,
+            w.wp_actual_performance,
+            w.wp_remark,
+            w.wp_createDate,
+            w.wp_status,
+            w.t_user_id,
+            w.file_id,
+            w.check_point,
+            w.if_summary,
+            u.name
+        from rl_workplans w join t_user u on w.t_user_id = u.t_user_id
+         <where>
+           <if test="wpName != null">
+             w.wp_name=#{wpName,jdbcType=VARCHAR},
+           </if>
+           <if test="wpCreatedate != null and wpCreatedate !=''">
+             w.wp_createDate&gt;#{createDate1}
+           </if>
+           <if test="wpCreatedate != null and wpCreatedate !=''">
+             and w.wp_createDate&lt;#{createDate2}
+           </if>
+         </where>
+        order by w.wp_createDate desc
+  </select>
+
+  <insert id="insertWork" parameterType="com.rl.vo.UserWorkPlans">
+    insert into rl_workplans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wpId != null">
+        wp_id,
+      </if>
+      <if test="wpName != null">
+        wp_name,
+      </if>
+      <if test="wpStarttime != null">
+        wp_startTime,
+      </if>
+      <if test="wpEndtime != null">
+        wp_endTime,
+      </if>
+      <if test="wpContent != null">
+        wp_content,
+      </if>
+      <if test="wpKeypoint != null">
+        wp_keypoint,
+      </if>
+      <if test="wpProspectPerformance != null">
+        wp_prospect_performance,
+      </if>
+      <if test="wpActualPerformance != null">
+        wp_actual_performance,
+      </if>
+      <if test="wpRemark != null">
+        wp_remark,
+      </if>
+      <if test="wpCreatedate != null">
+        wp_createDate,
+      </if>
+      <if test="wpStatus != null">
+        wp_status,
+      </if>
+      <if test="tUserId != null">
+        t_user_id,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="checkPoint != null">
+        check_point,
+      </if>
+      <if test="ifSummary != null">
+        if_summary,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wpId != null">
+        #{wpId,jdbcType=INTEGER},
+      </if>
+      <if test="wpName != null">
+        #{wpName,jdbcType=VARCHAR},
+      </if>
+      <if test="wpStarttime != null">
+        #{wpStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wpEndtime != null">
+        #{wpEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wpContent != null">
+        #{wpContent,jdbcType=VARCHAR},
+      </if>
+      <if test="wpKeypoint != null">
+        #{wpKeypoint,jdbcType=INTEGER},
+      </if>
+      <if test="wpProspectPerformance != null">
+        #{wpProspectPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="wpActualPerformance != null">
+        #{wpActualPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="wpRemark != null">
+        #{wpRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="wpCreatedate != null">
+        #{wpCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wpStatus != null">
+        #{wpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="tUserId != null">
+        #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPoint != null">
+        #{checkPoint,jdbcType=INTEGER},
+      </if>
+      <if test="ifSummary != null">
+        #{ifSummary,jdbcType=INTEGER},
+      </if>
+      <if test="deptId != null">
+        #{dept_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByWpId" resultMap="BaseResultMaps">
+    select wp_id,
+    wp_name,
+    wp_startTime,
+    wp_endTime,
+    wp_content,
+    wp_keypoint,
+    wp_prospect_performance,
+    wp_actual_performance,
+    wp_remark,
+    wp_createDate,
+    wp_status,
+    t_user_id,
+    file_id,
+    check_point,
+    if_summary,
+    from rl_workplans where wp_id = #{wpId}
+  </select>
+  <update id="updateKeypoint">
+        update rl_workplans r
+		join t_user t on r.t_user_id = t.t_user_id
+		set r.check_point = #{checkPoint}
+		where
+		r.wp_id = #{wpId}
+  </update>
+
+  <update id="updateWork">
+    update rl_workplans
+    set wp_actual_performance = #{wpActualPerformance},if_summary = 1
+    where wp_id = #{wpId}
+  </update>
+
+
+  <!--查询所有工作计划-->
+  <select id="getWorkByIdNameDate" parameterType="String" resultMap="BaseResultMaps">
+    select
+    w.wp_id,
+    w.wp_name,
+    w.wp_startTime,
+    w.wp_endTime,
+    w.wp_content,
+    w.wp_keypoint,
+    w.wp_prospect_performance,
+    w.wp_actual_performance,
+    w.wp_remark,
+    w.wp_createDate,
+    w.wp_status,
+    w.t_user_id,
+    w.file_id,
+    w.check_point,
+    w.if_summary,
+    u.name
+    from rl_workplans w join t_user u on w.t_user_id = u.t_user_id
+    where 1=1
+    <if test="wpName != null">
+      and w.wp_name  like '%${wpName}%'
+    </if>
+    <if test="file_createDate1 != null and file_createDate2 != null">
+      and w.wp_createDate between #{file_createDate1} and #{file_createDate2} and u.status=1  order by w.wp_createDate desc
+    </if>
+  </select>
+
+
+  <!--查看工作计划详情-->
+  <select id="getWorkPlansDetailList" parameterType="string" resultMap="BaseResultMaps">
+    select r.wp_id,
+            r.wp_name,
+            r.wp_startTime,
+            r.wp_endTime,
+            r.wp_content,
+            r.wp_keypoint,
+            r.wp_prospect_performance,
+            r.wp_actual_performance,
+            r.wp_remark,
+            r.wp_createDate,
+            r.wp_status,
+            r.t_user_id,
+            r.file_id,
+            r.check_point,
+            r.if_summary,
+            t.name from rl_workplans r join t_user t on r.t_user_id = t.t_user_id
+    where r.t_user_id = #{tUserId} AND DATE_FORMAT(r.wp_createDate, '%Y-%m-%d') = DATE_FORMAT(#{wpCreatedate},'%Y-%m-%d')
+  </select>
+</mapper>

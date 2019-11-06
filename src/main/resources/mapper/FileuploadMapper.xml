@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.FileuploadMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.Fileupload">
+    <id column="file_id" jdbcType="INTEGER" property="fileId" />
+    <result column="file_createDate" jdbcType="TIMESTAMP" property="fileCreatedate" />
+    <result column="file_deleteDate" jdbcType="TIMESTAMP" property="fileDeletedate" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="file_readAccount" jdbcType="INTEGER" property="fileReadaccount" />
+    <result column="file_priority" jdbcType="INTEGER" property="filePriority" />
+    <result column="file_kinds" jdbcType="INTEGER" property="fileKinds" />
+    <result column="file_status" jdbcType="INTEGER" property="fileStatus" />
+    <result column="action_id" jdbcType="INTEGER" property="actionId" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_uploader" jdbcType="VARCHAR" property="fileUploader" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    file_id, file_createDate, file_deleteDate, file_path, file_readAccount, file_priority, 
+    file_kinds, file_status, action_id, file_name, file_uploader, t_user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_fileupload
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_fileupload
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rl.model.Fileupload">
+    insert into sys_fileupload (file_id, file_createDate, file_deleteDate, 
+      file_path, file_readAccount, file_priority, 
+      file_kinds, file_status, action_id, 
+      file_name, file_uploader, t_user_id
+      )
+    values (#{fileId,jdbcType=INTEGER}, #{fileCreatedate,jdbcType=TIMESTAMP}, #{fileDeletedate,jdbcType=TIMESTAMP}, 
+      #{filePath,jdbcType=VARCHAR}, #{fileReadaccount,jdbcType=INTEGER}, #{filePriority,jdbcType=INTEGER}, 
+      #{fileKinds,jdbcType=INTEGER}, #{fileStatus,jdbcType=INTEGER}, #{actionId,jdbcType=INTEGER}, 
+      #{fileName,jdbcType=VARCHAR}, #{fileUploader,jdbcType=VARCHAR}, #{tUserId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.model.Fileupload">
+    insert into sys_fileupload
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="fileCreatedate != null">
+        file_createDate,
+      </if>
+      <if test="fileDeletedate != null">
+        file_deleteDate,
+      </if>
+      <if test="filePath != null">
+        file_path,
+      </if>
+      <if test="fileReadaccount != null">
+        file_readAccount,
+      </if>
+      <if test="filePriority != null">
+        file_priority,
+      </if>
+      <if test="fileKinds != null">
+        file_kinds,
+      </if>
+      <if test="fileStatus != null">
+        file_status,
+      </if>
+      <if test="actionId != null">
+        action_id,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="fileUploader != null">
+        file_uploader,
+      </if>
+      <if test="tUserId != null">
+        t_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="fileCreatedate != null">
+        #{fileCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileDeletedate != null">
+        #{fileDeletedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileReadaccount != null">
+        #{fileReadaccount,jdbcType=INTEGER},
+      </if>
+      <if test="filePriority != null">
+        #{filePriority,jdbcType=INTEGER},
+      </if>
+      <if test="fileKinds != null">
+        #{fileKinds,jdbcType=INTEGER},
+      </if>
+      <if test="fileStatus != null">
+        #{fileStatus,jdbcType=INTEGER},
+      </if>
+      <if test="actionId != null">
+        #{actionId,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUploader != null">
+        #{fileUploader,jdbcType=VARCHAR},
+      </if>
+      <if test="tUserId != null">
+        #{tUserId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rl.model.Fileupload">
+    update sys_fileupload
+    <set>
+      <if test="fileCreatedate != null">
+        file_createDate = #{fileCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileDeletedate != null">
+        file_deleteDate = #{fileDeletedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filePath != null">
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileReadaccount != null">
+        file_readAccount = #{fileReadaccount,jdbcType=INTEGER},
+      </if>
+      <if test="filePriority != null">
+        file_priority = #{filePriority,jdbcType=INTEGER},
+      </if>
+      <if test="fileKinds != null">
+        file_kinds = #{fileKinds,jdbcType=INTEGER},
+      </if>
+      <if test="fileStatus != null">
+        file_status = #{fileStatus,jdbcType=INTEGER},
+      </if>
+      <if test="actionId != null">
+        action_id = #{actionId,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUploader != null">
+        file_uploader = #{fileUploader,jdbcType=VARCHAR},
+      </if>
+      <if test="tUserId != null">
+        t_user_id = #{tUserId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rl.model.Fileupload">
+    update sys_fileupload
+    set file_createDate = #{fileCreatedate,jdbcType=TIMESTAMP},
+      file_deleteDate = #{fileDeletedate,jdbcType=TIMESTAMP},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      file_readAccount = #{fileReadaccount,jdbcType=INTEGER},
+      file_priority = #{filePriority,jdbcType=INTEGER},
+      file_kinds = #{fileKinds,jdbcType=INTEGER},
+      file_status = #{fileStatus,jdbcType=INTEGER},
+      action_id = #{actionId,jdbcType=INTEGER},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_uploader = #{fileUploader,jdbcType=VARCHAR},
+      t_user_id = #{tUserId,jdbcType=VARCHAR}
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+  <select id="findFileByTitleDate" resultType="java.util.List">
+  select file_id,file_name,file_createDate,file_deleteDate,
+      file_path,file_status,file_uploader,t_user_id
+  from sys_fileupload
+  where file_name like '%#{file_name}%'
+  and file_createDate between #{file_createDate1} and #{file_createDate2}
+  </select>
+
+</mapper>

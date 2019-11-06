@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.DeptMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.Dept">
+    <id column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="dept_address" jdbcType="VARCHAR" property="deptAddress" />
+    <result column="dept_company" jdbcType="VARCHAR" property="deptCompany" />
+  </resultMap>
+  <resultMap id="BaseResultMaps" type="com.rl.vo.UserDept">
+    <id column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="engname" jdbcType="VARCHAR" property="engname" />
+    <result column="question" jdbcType="VARCHAR" property="question" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="salary" jdbcType="DECIMAL" property="salary" />
+    <result column="userpost" jdbcType="VARCHAR" property="userpost" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="dept_address" jdbcType="VARCHAR" property="deptAddress" />
+    <result column="dept_company" jdbcType="VARCHAR" property="deptCompany" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dept_id, dept_name, dept_address, dept_company
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rl_dept
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rl_dept
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rl.model.Dept">
+    insert into rl_dept (dept_id, dept_name, dept_address, 
+      dept_company)
+    values (#{deptId,jdbcType=INTEGER}, #{deptName,jdbcType=VARCHAR}, #{deptAddress,jdbcType=VARCHAR}, 
+      #{deptCompany,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.model.Dept">
+    insert into rl_dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="deptName != null">
+        dept_name,
+      </if>
+      <if test="deptAddress != null">
+        dept_address,
+      </if>
+      <if test="deptCompany != null">
+        dept_company,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptId != null">
+        #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="deptName != null">
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptAddress != null">
+        #{deptAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCompany != null">
+        #{deptCompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rl.model.Dept">
+    update rl_dept
+    <set>
+      <if test="deptName != null">
+        dept_name = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptAddress != null">
+        dept_address = #{deptAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCompany != null">
+        dept_company = #{deptCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rl.model.Dept">
+    update rl_dept
+    set dept_name = #{deptName,jdbcType=VARCHAR},
+      dept_address = #{deptAddress,jdbcType=VARCHAR},
+      dept_company = #{deptCompany,jdbcType=VARCHAR}
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </update>
+
+  <!--通过部门id查部门内容-->
+  <select id="selectDeptById" resultMap="BaseResultMap">
+    SELECT d.dept_id,
+           d.dept_name,
+           d.dept_address,
+           d.dept_company
+           FROM rl_dept AS d WHERE d.dept_id=#{deptId}
+  </select>
+
+  <!--查所有部门内容-->
+  <select id="selectDept" resultMap="BaseResultMap">
+    SELECT d.dept_id,
+    d.dept_name,
+    d.dept_address,
+    d.dept_company
+    FROM rl_dept AS d
+  </select>
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.EducationMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.Education">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="education" jdbcType="INTEGER" property="education" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="profession" jdbcType="VARCHAR" property="profession" />
+    <result column="s_starttime" jdbcType="TIMESTAMP" property="sStarttime" />
+    <result column="s_endtime" jdbcType="TIMESTAMP" property="sEndtime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.rl.model.Education">
+    insert into rl_education (id, t_user_id, education, 
+      school, profession, s_starttime, 
+      s_endtime)
+    values (#{id,jdbcType=INTEGER}, #{tUserId,jdbcType=VARCHAR}, #{education,jdbcType=INTEGER}, 
+      #{school,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{sStarttime,jdbcType=TIMESTAMP}, 
+      #{sEndtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.model.Education">
+    insert into rl_education
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tUserId != null">
+        t_user_id,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="school != null">
+        school,
+      </if>
+      <if test="profession != null">
+        profession,
+      </if>
+      <if test="sStarttime != null">
+        s_starttime,
+      </if>
+      <if test="sEndtime != null">
+        s_endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tUserId != null">
+        #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=INTEGER},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="sStarttime != null">
+        #{sStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sEndtime != null">
+        #{sEndtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

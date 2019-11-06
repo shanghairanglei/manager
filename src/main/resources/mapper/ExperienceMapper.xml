@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.ExperienceMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.Experience">
+    <id column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="c_starttime" jdbcType="TIMESTAMP" property="cStarttime" />
+    <result column="c_endtime" jdbcType="TIMESTAMP" property="cEndtime" />
+    <result column="c_dept" jdbcType="INTEGER" property="cDept" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.rl.model.Experience">
+    <result column="c_responsibility" jdbcType="LONGVARCHAR" property="cResponsibility" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    e_id, t_user_id, company, c_starttime, c_endtime, c_dept
+  </sql>
+  <sql id="Blob_Column_List">
+    c_responsibility
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from rl_experience
+    where e_id = #{eId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rl_experience
+    where e_id = #{eId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rl.model.Experience">
+    insert into rl_experience (e_id, t_user_id, company, 
+      c_starttime, c_endtime, c_dept, 
+      c_responsibility)
+    values (#{eId,jdbcType=INTEGER}, #{tUserId,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{cStarttime,jdbcType=TIMESTAMP}, #{cEndtime,jdbcType=TIMESTAMP}, #{cDept,jdbcType=INTEGER}, 
+      #{cResponsibility,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.model.Experience">
+    insert into rl_experience
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="tUserId != null">
+        t_user_id,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="cStarttime != null">
+        c_starttime,
+      </if>
+      <if test="cEndtime != null">
+        c_endtime,
+      </if>
+      <if test="cDept != null">
+        c_dept,
+      </if>
+      <if test="cResponsibility != null">
+        c_responsibility,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="tUserId != null">
+        #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="cStarttime != null">
+        #{cStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cEndtime != null">
+        #{cEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cDept != null">
+        #{cDept,jdbcType=INTEGER},
+      </if>
+      <if test="cResponsibility != null">
+        #{cResponsibility,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rl.model.Experience">
+    update rl_experience
+    <set>
+      <if test="tUserId != null">
+        t_user_id = #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="cStarttime != null">
+        c_starttime = #{cStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cEndtime != null">
+        c_endtime = #{cEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cDept != null">
+        c_dept = #{cDept,jdbcType=INTEGER},
+      </if>
+      <if test="cResponsibility != null">
+        c_responsibility = #{cResponsibility,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.rl.model.Experience">
+    update rl_experience
+    set t_user_id = #{tUserId,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      c_starttime = #{cStarttime,jdbcType=TIMESTAMP},
+      c_endtime = #{cEndtime,jdbcType=TIMESTAMP},
+      c_dept = #{cDept,jdbcType=INTEGER},
+      c_responsibility = #{cResponsibility,jdbcType=LONGVARCHAR}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rl.model.Experience">
+    update rl_experience
+    set t_user_id = #{tUserId,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      c_starttime = #{cStarttime,jdbcType=TIMESTAMP},
+      c_endtime = #{cEndtime,jdbcType=TIMESTAMP},
+      c_dept = #{cDept,jdbcType=INTEGER}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+</mapper>

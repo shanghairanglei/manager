@@ -1,0 +1,23 @@
+.form-control{
+	display: inline;
+	width: auto;
+	margin-left: 10px;
+}
+@media (min-width:768px) {
+	.panel-heading{
+		height: 90px;
+	}
+}
+.panel-heading>div{
+	margin: 5px;
+}
+thead>tr>th{
+	text-align: center;
+}
+tbody>tr>td{
+	text-align: center;
+}
+tbody>tr>td>button{
+	background: #FFFFFF;
+	border: 1px solid #FFFFFF;
+}

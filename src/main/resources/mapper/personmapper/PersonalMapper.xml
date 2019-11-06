@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.personmapper.PersonalMapper">
+    <resultMap id="BaseResultMap" type="com.rl.model.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <id column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="salt" jdbcType="VARCHAR" property="salt" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="engname" jdbcType="VARCHAR" property="engname" />
+        <result column="question" jdbcType="VARCHAR" property="question" />
+        <result column="answer" jdbcType="VARCHAR" property="answer" />
+        <result column="img" jdbcType="VARCHAR" property="img" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="com.rl.vo.EduProHobbyVo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="hobby" jdbcType="VARCHAR" property="hobby" />
+        <result column="education" jdbcType="INTEGER" property="education" />
+        <result column="school" jdbcType="VARCHAR" property="school" />
+        <result column="profession" jdbcType="VARCHAR" property="profession" />
+        <result column="s_starttime" jdbcType="TIMESTAMP" property="sStarttime" />
+        <result column="s_endtime" jdbcType="TIMESTAMP" property="sEndtime" />
+        <result column="p_name" jdbcType="VARCHAR" property="pName" />
+        <result column="p_starttime" jdbcType="TIMESTAMP" property="pStarttime" />
+        <result column="p_endtime" jdbcType="TIMESTAMP" property="pEndtime" />
+        <result column="p_company" jdbcType="VARCHAR" property="pCompany" />
+        <result column="p_role" jdbcType="VARCHAR" property="pRole" />
+        <result column="p_intro" jdbcType="LONGVARCHAR" property="pIntro" />
+        <result column="e_id" jdbcType="INTEGER" property="eId" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="c_starttime" jdbcType="TIMESTAMP" property="cStarttime" />
+        <result column="c_endtime" jdbcType="TIMESTAMP" property="cEndtime" />
+        <result column="c_dept" jdbcType="INTEGER" property="cDept" />
+        <result column="c_responsibility" jdbcType="LONGVARCHAR" property="cResponsibility" />
+    </resultMap>
+
+    <resultMap id="BaseResultMap3" type="com.rl.model.UserEntity">
+        <id column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="salt" jdbcType="VARCHAR" property="salt" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="engname" jdbcType="VARCHAR" property="engname" />
+        <result column="question" jdbcType="VARCHAR" property="question" />
+        <result column="answer" jdbcType="VARCHAR" property="answer" />
+        <result column="img" jdbcType="VARCHAR" property="img" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+        <result column="salary" jdbcType="DECIMAL" property="salary" />
+        <result column="userpost" jdbcType="VARCHAR" property="userpost" />
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+
+    <!--修改用户头像-->
+    <update id="UploadImg" parameterType="String">
+        UPDATE t_user SET  img = #{realPath} WHERE t_user_id = #{tUserId}
+    </update>
+
+    <!--修改用户密码-->
+    <update id="UpdatePassWord">
+        UPDATE t_user
+        set
+        password = #{newPassword}
+        WHERE t_user_id = #{tUserId}
+    </update>
+
+    <!--查询教育经历-->
+    <select id="selectPersonal" resultMap="BaseResultMap2">
+        SELECT e.id,
+        e.t_user_id,
+        e.education,
+        e.school,
+        e.profession,
+        e.s_starttime,
+        e.s_endtime,
+        ex.e_id,
+        ex.company,
+        ex.c_starttime,
+        ex.c_endtime,
+        ex.c_dept,
+        p.id,
+        p.p_name,
+        p.p_starttime,
+        p.p_endtime,
+        p.p_company,
+        p.p_role,
+        p.e_id
+        FROM rl_education e JOIN rl_experience ex ON
+        e.t_user_id=ex.t_user_id JOIN rl_project p ON
+        ex.e_id = p.e_id
+        WHERE e.t_user_id = #{tUserId}
+    </select>
+
+    <!--查询兴趣-->
+    <select id="selectHobby" resultMap="BaseResultMap2">
+        SELECT
+        id,
+        t_user_id,
+        hobby
+        FROM rl_hobby
+        WHERE t_user_id = #{tUserId}
+    </select>
+
+    <!--查询工作经历-->
+    <select id="selectExperience" resultMap="BaseResultMap2">
+        SELECT
+        ex.e_id,
+        ex.t_user_id,
+        ex.company,
+        ex.c_starttime,
+        ex.c_endtime,
+        ex.c_dept,
+        ex.c_responsibility
+        FROM rl_experience ex
+        WHERE ex.t_user_id = #{tUserId}
+    </select>
+
+    <!--修改个人简介-->
+    <update id="UpdateProfile">
+        UPDATE t_user
+        set
+        description = #{newDescription}
+        WHERE t_user_id = #{tUserId}
+    </update>
+
+    <!--查询教育详情-->
+    <select id="selectEducation" parameterType="String" resultMap="BaseResultMap2">
+        SELECT e.t_user_id,
+               e.education,
+               e.school,
+               e.profession,
+               e.s_starttime,
+               e.s_endtime
+        FROM rl_education AS e WHERE e.t_user_id=#{tUserId}
+    </select>
+
+    <!--修改教育信息-->
+    <update id="updateEducation">
+        UPDATE rl_education
+        <set>
+            <if test="education != null">
+                education = #{education},
+            </if>
+            <if test="school != null">
+                school = #{school},
+            </if>
+            <if test="profession != null">
+                profession = #{profession},
+            </if>
+        </set>
+        WHERE t_user_id = #{tUserId}
+    </update>
+
+    <!--添加教育信息-->
+    <insert id="InsertEducation">
+        insert into rl_education
+        (t_user_id,education,school,profession) VALUES
+        (#{tUserId},#{education},#{school},#{profession});
+    </insert>
+
+    <!--查询工作经历-->
+    <select id="selectExperiences" resultMap="BaseResultMap2">
+        SELECT
+        ex.e_id,
+        ex.t_user_id,
+        ex.company,
+        ex.c_starttime,
+        ex.c_endtime,
+        ex.c_dept,
+        ex.c_responsibility
+        FROM rl_experience ex
+        WHERE ex.t_user_id = #{tUserId}
+    </select>
+
+    <!--修改工作信息-->
+    <update id="updateExperience">
+        UPDATE rl_experience
+        <set>
+            <if test="company != null">
+                company = #{company},
+            </if>
+            <if test="cResponsibility != null">
+                c_responsibility = #{cResponsibility},
+            </if>
+            <if test="cDept != null">
+                c_dept = #{cDept}
+            </if>
+        </set>
+        WHERE t_user_id = #{tUserId}
+    </update>
+
+    <!--添加工作信息-->
+    <insert id="InsertExperience">
+        insert into rl_experience
+               (t_user_id,company,c_responsibility) VALUES
+               (#{tUserId},#{company},#{cResponsibility});
+    </insert>
+
+    <!--查询项目经历-->
+    <select id="selectProject" parameterType="String" resultMap="BaseResultMap2">
+        SELECT  ex.e_id,
+                ex.t_user_id,
+                ex.company,
+                ex.c_starttime,
+                ex.c_endtime,
+                ex.c_dept,
+                ex.c_responsibility,
+                p.id,
+                p.p_name,
+                p.p_starttime,
+                p.p_endtime,
+                p.p_company,
+                p.p_role,
+                p_intro,
+                p.e_id
+                FROM rl_experience ex JOIN rl_project p ON  ex.e_id = p.e_id
+                WHERE ex.t_user_id=#{tUserId}
+    </select>
+
+    <!--修改项目信息-->
+    <update id="updateProject" parameterType="com.rl.vo.EduProHobbyVo">
+        UPDATE rl_project AS p
+        <set>
+            <if test="pName != null">
+                p.p_name = #{pName},
+            </if>
+            <if test="pRole != null">
+                p.p_role = #{pRole},
+            </if>
+            <if test="pIntro != null">
+                p.p_intro = #{pIntro}
+            </if>
+        </set>
+        WHERE p.e_id =(select e.e_id from rl_experience as e WHERE e.t_user_id=#{tUserId})
+    </update>
+
+    <!--添加项目信息-->
+    <insert id="InsertProject">
+        insert into rl_project
+        (t_user_id,p_name,p_role,p_intro,e_id,p_company) VALUES
+        (#{tUserId},#{pName},#{pRole},#{pIntro},#{eId},#{pCompany});
+    </insert>
+</mapper>

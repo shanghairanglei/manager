@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.ProjectMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.Project">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+    <result column="p_starttime" jdbcType="TIMESTAMP" property="pStarttime" />
+    <result column="p_endtime" jdbcType="TIMESTAMP" property="pEndtime" />
+    <result column="p_company" jdbcType="VARCHAR" property="pCompany" />
+    <result column="p_role" jdbcType="VARCHAR" property="pRole" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.rl.model.Project">
+    <result column="p_intro" jdbcType="LONGVARCHAR" property="pIntro" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, p_name, p_starttime, p_endtime, p_company, p_role, e_id
+  </sql>
+  <sql id="Blob_Column_List">
+    p_intro
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from rl_project
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rl_project
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rl.model.Project">
+    insert into rl_project (id, p_name, p_starttime, 
+      p_endtime, p_company, p_role, 
+      e_id, p_intro)
+    values (#{id,jdbcType=INTEGER}, #{pName,jdbcType=VARCHAR}, #{pStarttime,jdbcType=TIMESTAMP}, 
+      #{pEndtime,jdbcType=TIMESTAMP}, #{pCompany,jdbcType=VARCHAR}, #{pRole,jdbcType=VARCHAR}, 
+      #{eId,jdbcType=INTEGER}, #{pIntro,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.model.Project">
+    insert into rl_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pName != null">
+        p_name,
+      </if>
+      <if test="pStarttime != null">
+        p_starttime,
+      </if>
+      <if test="pEndtime != null">
+        p_endtime,
+      </if>
+      <if test="pCompany != null">
+        p_company,
+      </if>
+      <if test="pRole != null">
+        p_role,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="pIntro != null">
+        p_intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pName != null">
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pStarttime != null">
+        #{pStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pEndtime != null">
+        #{pEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pCompany != null">
+        #{pCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="pRole != null">
+        #{pRole,jdbcType=VARCHAR},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="pIntro != null">
+        #{pIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rl.model.Project">
+    update rl_project
+    <set>
+      <if test="pName != null">
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pStarttime != null">
+        p_starttime = #{pStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pEndtime != null">
+        p_endtime = #{pEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pCompany != null">
+        p_company = #{pCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="pRole != null">
+        p_role = #{pRole,jdbcType=VARCHAR},
+      </if>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="pIntro != null">
+        p_intro = #{pIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.rl.model.Project">
+    update rl_project
+    set p_name = #{pName,jdbcType=VARCHAR},
+      p_starttime = #{pStarttime,jdbcType=TIMESTAMP},
+      p_endtime = #{pEndtime,jdbcType=TIMESTAMP},
+      p_company = #{pCompany,jdbcType=VARCHAR},
+      p_role = #{pRole,jdbcType=VARCHAR},
+      e_id = #{eId,jdbcType=INTEGER},
+      p_intro = #{pIntro,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rl.model.Project">
+    update rl_project
+    set p_name = #{pName,jdbcType=VARCHAR},
+      p_starttime = #{pStarttime,jdbcType=TIMESTAMP},
+      p_endtime = #{pEndtime,jdbcType=TIMESTAMP},
+      p_company = #{pCompany,jdbcType=VARCHAR},
+      p_role = #{pRole,jdbcType=VARCHAR},
+      e_id = #{eId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

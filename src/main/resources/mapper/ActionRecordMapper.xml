@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.ActionRecordMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.ActionRecord">
+    <id column="action_id" jdbcType="INTEGER" property="actionId" />
+    <result column="action_time" jdbcType="TIMESTAMP" property="actionTime" />
+    <result column="action_kinds" jdbcType="INTEGER" property="actionKinds" />
+    <result column="action_name" jdbcType="VARCHAR" property="actionName" />
+    <result column="file_id" jdbcType="INTEGER" property="fileId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    action_id, action_time, action_kinds, action_name, file_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rl_action_record
+    where action_id = #{actionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rl_action_record
+    where action_id = #{actionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rl.model.ActionRecord">
+    insert into rl_action_record (action_id, action_time, action_kinds, 
+      action_name, file_id)
+    values (#{actionId,jdbcType=INTEGER}, #{actionTime,jdbcType=TIMESTAMP}, #{actionKinds,jdbcType=INTEGER}, 
+      #{actionName,jdbcType=VARCHAR}, #{fileId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.model.ActionRecord">
+    insert into rl_action_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="actionId != null">
+        action_id,
+      </if>
+      <if test="actionTime != null">
+        action_time,
+      </if>
+      <if test="actionKinds != null">
+        action_kinds,
+      </if>
+      <if test="actionName != null">
+        action_name,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="actionId != null">
+        #{actionId,jdbcType=INTEGER},
+      </if>
+      <if test="actionTime != null">
+        #{actionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionKinds != null">
+        #{actionKinds,jdbcType=INTEGER},
+      </if>
+      <if test="actionName != null">
+        #{actionName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rl.model.ActionRecord">
+    update rl_action_record
+    <set>
+      <if test="actionTime != null">
+        action_time = #{actionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionKinds != null">
+        action_kinds = #{actionKinds,jdbcType=INTEGER},
+      </if>
+      <if test="actionName != null">
+        action_name = #{actionName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where action_id = #{actionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rl.model.ActionRecord">
+    update rl_action_record
+    set action_time = #{actionTime,jdbcType=TIMESTAMP},
+      action_kinds = #{actionKinds,jdbcType=INTEGER},
+      action_name = #{actionName,jdbcType=VARCHAR},
+      file_id = #{fileId,jdbcType=INTEGER}
+    where action_id = #{actionId,jdbcType=INTEGER}
+  </update>
+</mapper>

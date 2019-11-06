@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>团队成员</title>
+	<link href="/static/css/bootstrap.css" rel="stylesheet" />
+	  <link href="/static/css/nav.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/iconfont.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/team.css"/>
+	<script src="/static/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	  <script src="/static/js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+	  <script src="/static/js/team.js" type="text/javascript" charset="utf-8"></script>
+	<!--[if lt IE 9]>
+				 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+				 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+  </head>
+
+  <body>
+		<div id="wrapper">
+			<!-- top -->
+			<nav class="navbar top-navbar base-index" role="navigation">
+			    <div class="navbar-header">
+			        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+			            <span class="sr-only">Toggle navigation</span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			        </button>
+			        <a class="navbar-brand"><img src="/static/img/logo.jpg" class="logo"></a>
+			    </div>
+				<p class="navbar-text .visible-xs-block">早上好，欢迎来到让雷科技 ! </p>
+				<ul class="nav navbar-nav navbar-right base-nav">
+					<li><a href=""  class="timeaa"><span class="iconfont">&#xe663;</span></a></li>
+					<li><a th:href="@{'/performance/personalCenter?tUserId='+${session.user.tUserId}+'&roleId='+${session 	.roleId}}"><span class="iconfont">&#xe647;</span> 我的绩效</a></li>
+					<li><a href="/personal/go"><img th:src="@{${session.user.img}}" style="border-radius: 50%; width: 30px;height: 30px;margin-right: 10px;">个人中心</a></li>
+				</ul>
+				<div class="Crumbs">
+					<ul class="breadcrumb">
+						<li><a href="#">让雷科技</a></li>
+						<li class="active">团队成员</li>
+					</ul>
+				</div>
+			</nav>
+			<!--/. NAV TOP  -->
+			<nav class="navbar-side" role="navigation">
+			    <div class="sidebar-collapse">
+			        <ul class="nav" id="main-menu">
+						<li>
+							<a class="active-menu" href="/upload/findWork"><span class="iconfont">&#xe64f;</span>
+								<cite>计划总结</cite></a>
+						</li>
+						<li>
+							<a class="active-menu" href="/workplan/go"><span class="iconfont">&#xe663;</span> <cite>工作计划</cite></a>
+						</li>
+						<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 3) or (${session.roleId} eq 5)">
+							<a class="active-menu" href="/performance/checkRole"><span class="iconfont">&#xe647;</span>
+								<cite>绩效统计</cite></a>
+						</li>
+						<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 5)">
+							<a class="active-menu" href="/user/go"><span class="iconfont">&#xe68f;</span>
+								<cite>人员管理</cite></a>
+						</li>
+						<li  class="nav-click">
+							<a class="active-menu" href="/team/go"><span class="iconfont">&#xe610;</span>
+								<cite>团队介绍</cite></a>
+						</li>
+			        </ul>
+
+			    </div>
+
+			</nav>
+			<!-- /. NAV SIDE  -->
+			<div id="page-wrapper">
+				<div id="page-inner">
+					<div class="row">
+
+					</div>
+					<div class="row">
+						<div class="col-md-9 col-sm-12 col-xs-12">
+							<div class="main">
+								<div class="row">
+									<div class="col-md-2">
+										<dl class="dl-horizontal">
+										  <dt class="plan"><a href="">成员组成</a></dt>
+										</dl>
+									</div>
+									<div class="col-md-7 col-md-offset-2 col-xs-12">
+										<ul class="nav-team">
+											<li class="activea">管理团队</li>
+											<li>核心团队</li>
+											<li>外部团队</li>
+										</ul>
+									</div>
+								</div>
+								<div class="articles">
+									<div class="row">
+										<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12">
+											<dl class="articles-one">
+												<dt>管理团队篇</dt>
+												<dd>Management Team</dd>
+											</dl>
+										</div>
+										<div class="col-md-9  col-lg-9  col-xs-12 col-sm-12">
+											<dl class="articles-oneright">
+												<dt>由网络营销实战专家、企业管理咨询顾问、品牌策划专家、资深IT工程师、高级设计师等组成的百人专业团队，</dt>
+												<dd>擅长响应式网站建设、企业信息化管理软件开发、营销推广、品牌策划、体验设计、工业设计、人工智能平面设计平台</dd>
+											</dl>
+										</div>
+									</div>
+									<div class="row core" >
+										<div class="col-md-4 col-lg-3 col-xs-12 col-sm-12" th:each="user,state:${userDeptList}" th:if="${user.teamId} eq 1">
+											<div class="articles-card">
+												<div class="img"><a id="ger" th:href="@{'/team/Individual?tUserId='+${user.tUserId}}"><img th:src="@{${user.img}}" class="img-responsive" alt="Cinque Terre" th:onclick="see([[${user.tUserId}]]);"></a> </div>
+												<div class="" style="height: 67px;">
+													<div class="text-center name" th:text="${user.name}">王婷</div>
+													<div class="text-center post" th:text="${user.userpost}">测试工程师</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="articles articles1">
+									<div class="row">
+										<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12">
+											<dl class="articles-one">
+												<dt>核心团队篇</dt>
+												<dd>Core Team</dd>
+											</dl>
+										</div>
+										<div class="col-md-9 col-lg-9 col-xs-12 col-sm-12">
+											<dl class="articles-oneright">
+												<dt>由网络营销实战专家、企业管理咨询顾问、品牌策划专家、资深IT工程师、高级设计师等组成的百人专业团队，</dt>
+												<dd>擅长响应式网站建设、企业信息化管理软件开发、营销推广、品牌策划、体验设计、工业设计、人工智能平面设计平台</dd>
+											</dl>
+										</div>
+									</div>
+									<div class="row core">
+										<div class="col-md-4 col-lg-3 col-xs-12 col-sm-12" th:each="user,state : ${userDeptList}" th:if="${user.teamId} eq 0">
+											<div class="articles-card" >
+												<div class="img"><a th:href="@{'/team/Individual?tUserId='+${user.tUserId}}"><img th:src="@{${user.img}}" class="img-responsive" alt="Cinque Terre"></a> </div>
+												<div class="text-center name" th:text="${user.name}">王婷</div>
+												<div class="text-center post" th:text="${user.userpost}">测试工程师</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="articles articles2">
+									<div class="row">
+										<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12">
+											<dl class="articles-one">
+												<dt>外部团队篇</dt>
+												<dd>External Team</dd>
+											</dl>
+										</div>
+										<div class="col-md-9 col-lg-9 col-xs-12 col-sm-12">
+											<dl class="articles-oneright">
+												<dt>由网络营销实战专家、企业管理咨询顾问、品牌策划专家、资深IT工程师、高级设计师等组成的百人专业团队，</dt>
+												<dd>擅长响应式网站建设、企业信息化管理软件开发、营销推广、品牌策划、体验设计、工业设计、人工智能平面设计平台</dd>
+											</dl>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4 col-lg-3 col-xs-12 col-sm-12" th:each="user,state: ${userDeptList}" th:if="${user.teamId} eq 2">
+											<div class="articles-card" >
+												<div class="img"><a th:href="@{'/team/Individual?tUserId='+${user.tUserId}}"><img th:src="@{${user.img}}"  class="img-responsive" alt="Cinque Terre"></a> </div>
+												<div class="text-center name" th:text="${user.name}">王婷</div>
+												<div class="text-center post" th:text="${user.userpost}">测试工程师</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-12 col-xs-12">
+							<div class="right">
+								<div class="row" th:each="user,state:${userList}">
+									<div class="col-xs-12">
+										<div class="col-xs-1">
+											<img th:src="@{${user.img}}" class="img-circle">
+										</div>
+										<div class="col-xs-8">
+											<ul class="right-font">
+												<li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
+												<li th:text="${user.userpost}">UI工程师</li>
+											</ul>
+										</div>
+										<div class="col-xs-2">
+											<a th:href="@{'#'+${state.count}}" aria-expanded="false" data-toggle="collapse"
+											   class="collapsed">
+												<font style="vertical-align: inherit;">
+                                            <span class="iconfont right-span tooltip-show" data-toggle="tooltip"
+												  title="点击展开" data-placement="bottom">&#xe64b;</span>
+												</font>
+											</a>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<ul th:id="${state.count}" class="list-unstyled collapse" style="">
+												<p class="brief-introduction" th:text="${user.description}">白少</p>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </body>
+  <script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/static/js/message.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    // 获取当前时间
+    var time = new Date();
+    var day = ("0" + time.getDate()).slice(-2);
+    var month = ("0" + (time.getMonth() + 1)).slice(-2);
+    var today = time.getFullYear() + "-" + (month) + "-" + (day);
+</script>
+</html>

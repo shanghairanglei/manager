@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.teammapper.TeamMapper">
+    <resultMap id="BaseResultMaps" type="com.rl.model.UserEntity">
+        <id column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="salt" jdbcType="VARCHAR" property="salt" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="engname" jdbcType="VARCHAR" property="engname" />
+        <result column="question" jdbcType="VARCHAR" property="question" />
+        <result column="answer" jdbcType="VARCHAR" property="answer" />
+        <result column="img" jdbcType="VARCHAR" property="img" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+        <result column="salary" jdbcType="DECIMAL" property="salary" />
+        <result column="userpost" jdbcType="VARCHAR" property="userpost" />
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="team_id" jdbcType="INTEGER" property="teamId" />
+    </resultMap>
+
+    <resultMap id="Bas" type="com.rl.model.Skill">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="skill" jdbcType="VARCHAR" property="skill" />
+        <result column="level" jdbcType="INTEGER" property="level" />
+    </resultMap>
+
+    <resultMap id="BaseResultMap" type="com.rl.model.Honor">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="honor" jdbcType="VARCHAR" property="honor" />
+        <result column="honor_time" jdbcType="TIMESTAMP" property="honorTime" />
+    </resultMap>
+
+    <resultMap id="BaseResultMap2" type="com.rl.vo.ProjectExpe">
+        <id column="e_id" jdbcType="INTEGER" property="eId" />
+        <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="c_starttime" jdbcType="TIMESTAMP" property="cStarttime" />
+        <result column="c_endtime" jdbcType="TIMESTAMP" property="cEndtime" />
+        <result column="c_responsibility" jdbcType="LONGVARCHAR" property="cResponsibility" />
+        <result column="c_dept" jdbcType="INTEGER" property="cDept" />
+        <result column="p_name" jdbcType="VARCHAR" property="pName" />
+        <result column="p_starttime" jdbcType="TIMESTAMP" property="pStarttime" />
+        <result column="p_endtime" jdbcType="TIMESTAMP" property="pEndtime" />
+        <result column="p_company" jdbcType="VARCHAR" property="pCompany" />
+        <result column="p_intro" jdbcType="LONGVARCHAR" property="pIntro" />
+        <result column="p_role" jdbcType="VARCHAR" property="pRole" />
+        <result column="e_id" jdbcType="INTEGER" property="eId" />
+    </resultMap>
+
+    <!--查询用户技能特长-->
+    <select id="selectSkill" resultMap="Bas" parameterType="String">
+        SELECT r.id,
+        r.t_user_id,
+        r.level,
+        r.skill
+        FROM rl_skill AS r
+        WHERE r.t_user_id =#{tUserId}
+    </select>
+
+    <select id="selectHonor" resultMap="BaseResultMap" parameterType="String">
+        SELECT h.id,
+        h.t_user_id,
+        h.honor,
+        h.honor_time
+        FROM rl_honor AS h
+        WHERE h.t_user_id =#{tUserId}
+    </select>
+
+    <select id="selectProject" resultMap="BaseResultMap2" parameterType="String">
+         SELECT ex.e_id,
+                ex.t_user_id,
+                ex.company,
+                ex.c_starttime,
+                ex.c_endtime,
+                ex.c_dept,
+                ex.c_responsibility,
+                p.id,
+                p.p_name,
+                p.p_starttime,
+                p.p_endtime,
+                p_intro,
+                p.p_company,
+                p.p_role,
+                p.e_id
+        FROM rl_experience ex JOIN rl_project p ON ex.e_id = p.e_id
+        WHERE ex.t_user_id = #{tUserId}
+    </select>
+
+</mapper>

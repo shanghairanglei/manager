@@ -1,0 +1,41 @@
+@media (min-width: 768px) {
+	.upoad {
+		width: 150px;
+		margin: -31px 42px;
+	}
+	.upoad1 {
+		width: 150px;
+		margin: -31px 64px;
+	}
+	.middle-bottom{
+		height: 80px;
+	}
+}
+
+.middle-bottom>div {
+	margin-top: 20px;
+}
+.table {
+	text-align: center;
+}
+.table>thead>tr>th {
+	text-align: center;
+}
+.table>tbody>tr>td>button {
+	background: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	text-align: center;
+}
+@media (min-width: 768px){
+	.table>tbody>tr>td>button>span {
+		color: black;
+		margin-left: 5px;
+	}
+}
+.panel-default>.panel-heading {
+	background-color: #FFFFFF;
+	border-color: #EEEEEE;
+}
+.table>thead>tr>th {
+	border-bottom: 1px solid #EEEEEE;
+}

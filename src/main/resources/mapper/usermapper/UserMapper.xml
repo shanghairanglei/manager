@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.usermapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.User">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <id column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+      <result column="username" jdbcType="VARCHAR" property="username" />
+      <result column="password" jdbcType="VARCHAR" property="password" />
+      <result column="salt" jdbcType="VARCHAR" property="salt" />
+      <result column="email" jdbcType="VARCHAR" property="email" />
+      <result column="phone" jdbcType="VARCHAR" property="phone" />
+      <result column="sex" jdbcType="INTEGER" property="sex" />
+      <result column="age" jdbcType="INTEGER" property="age" />
+      <result column="status" jdbcType="INTEGER" property="status" />
+      <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="company" jdbcType="VARCHAR" property="company" />
+      <result column="engname" jdbcType="VARCHAR" property="engname" />
+      <result column="question" jdbcType="VARCHAR" property="question" />
+      <result column="answer" jdbcType="VARCHAR" property="answer" />
+      <result column="img" jdbcType="VARCHAR" property="img" />
+      <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+      <result column="salary" jdbcType="DECIMAL" property="salary" />
+      <result column="userpost" jdbcType="VARCHAR" property="userpost" />
+      <result column="description" jdbcType="VARCHAR" property="description" />
+      <result column="team_id" jdbcType="INTEGER" property="teamId" />
+  </resultMap>
+    <resultMap id="BaseResultMap3" type="com.rl.vo.UserDept">
+        <id column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="salt" jdbcType="VARCHAR" property="salt" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="engname" jdbcType="VARCHAR" property="engname" />
+        <result column="question" jdbcType="VARCHAR" property="question" />
+        <result column="answer" jdbcType="VARCHAR" property="answer" />
+        <result column="img" jdbcType="VARCHAR" property="img" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+        <result column="salary" jdbcType="DECIMAL" property="salary" />
+        <result column="userpost" jdbcType="VARCHAR" property="userpost" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="team_id" jdbcType="INTEGER" property="teamId" />
+        <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+        <result column="dept_address" jdbcType="VARCHAR" property="deptAddress" />
+        <result column="dept_company" jdbcType="VARCHAR" property="deptCompany" />
+    </resultMap>
+    <resultMap id="BaseResultMaps" type="com.rl.model.UserEntity">
+        <id column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="salt" jdbcType="VARCHAR" property="salt" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="engname" jdbcType="VARCHAR" property="engname" />
+        <result column="question" jdbcType="VARCHAR" property="question" />
+        <result column="answer" jdbcType="VARCHAR" property="answer" />
+        <result column="img" jdbcType="VARCHAR" property="img" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+        <result column="salary" jdbcType="DECIMAL" property="salary" />
+        <result column="userpost" jdbcType="VARCHAR" property="userpost" />
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="team_id" jdbcType="INTEGER" property="teamId" />
+    </resultMap>
+
+    <resultMap id="BaseResult" type="com.rl.dto.UserDto">
+        <id column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="salt" jdbcType="VARCHAR" property="salt" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="engname" jdbcType="VARCHAR" property="engname" />
+        <result column="question" jdbcType="VARCHAR" property="question" />
+        <result column="answer" jdbcType="VARCHAR" property="answer" />
+        <result column="img" jdbcType="VARCHAR" property="img" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+        <result column="salary" jdbcType="DECIMAL" property="salary" />
+        <result column="userpost" jdbcType="VARCHAR" property="userpost" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="firstUpperCase" jdbcType="VARCHAR" property="firstUpperCase" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, t_user_id, username, password, salt, email, phone, sex, age, status, create_time,
+        update_time, last_login_time, name, company, engname, question, answer, img ,dept_id,salary,userpost,description
+    </sql>
+    <insert id="insert" parameterType="com.rl.model.User">
+        insert into t_user (id, t_user_id, username,
+        password, salt, email,
+        phone, sex, age, status,
+        create_time, update_time, last_login_time,
+        name, company, engname,
+        question, answer, img ,dept_id,salary,userpost,description
+        )
+        values (#{id,jdbcType=INTEGER}, #{tUserId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{age,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP},
+        #{name,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{engname,jdbcType=VARCHAR},
+        #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{dept_id,jdbcType=INTEGER},
+        #{salary,jdbcType=DECIMAL},#{userpost,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.rl.model.User">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tUserId != null">
+                t_user_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="company != null">
+                company,
+            </if>
+            <if test="engname != null">
+                engname,
+            </if>
+            <if test="question != null">
+                question,
+            </if>
+            <if test="answer != null">
+                answer,
+            </if>
+            <if test="img != null">
+                img,
+            </if>
+            <if test="dept_id != null">
+                dept_id,
+            </if>
+            <if test="salary != null">
+                salary,
+            </if>
+            <if test="userpost != null">
+                userpost,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="tUserId != null">
+                #{tUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="engname != null">
+                #{engname,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null">
+                #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="dept_id != null">
+                #{dept_id,jdbcType=INTEGER},
+            </if>
+            <if test="salary != null">
+                #{salary,jdbcType=DECIMAL},
+            </if>
+            <if test="userpost != null">
+                userpost,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.rl.model.User">
+        update t_user
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="engname != null">
+                engname = #{engname,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null">
+                question = #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="dept_id != null">
+                dept_id = #{dept_id,jdbcType=INTEGER},
+            </if>
+            <if test="salary != null">
+                #{salary,jdbcType=DECIMAL},
+            </if>
+            <if test="userpost != null">
+                userpost,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+        and t_user_id = #{tUserId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.rl.model.User">
+        update t_user
+        set username = #{username,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        salt = #{salt,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=INTEGER},
+        age = #{age,jdbcType=INTEGER},
+        status = #{status,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+        name = #{name,jdbcType=VARCHAR},
+        company = #{company,jdbcType=VARCHAR},
+        engname = #{engname,jdbcType=VARCHAR},
+        question = #{question,jdbcType=VARCHAR},
+        answer = #{answer,jdbcType=VARCHAR},
+        img = #{img,jdbcType=VARCHAR},
+        dept_id = #{dept_id,jdbcType=INTEGER},
+        salary=#{salary,jdbcType=DECIMAL},
+        userpost=#{userpost,jdbcType=VARCHAR},
+        description=#{description,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+        and t_user_id = #{tUserId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectUserByNamePwd" parameterType="java.lang.String" resultType="com.rl.model.User">
+        select
+        id, t_user_id, username,
+        password, salt, email,
+        phone, sex, age, status,
+        create_time, update_time, last_login_time, dept_id,salary,userpost,description
+        from t_user
+        where username = #{username}
+        and password = #{password}
+    </select>
+    <select id="selectUserByName" parameterType="java.lang.String" resultType="com.rl.model.User">
+        select
+        id, t_user_id, username,
+        password, salt, email,
+        phone, sex, age, status,
+        create_time, update_time, last_login_time ,dept_id,salary,userpost,description
+        from t_user
+        where username = #{username}
+    </select>
+    <select id="selectUserById" parameterType="java.lang.Integer" resultType="com.rl.model.User">
+        select
+        id, t_user_id, username,
+        password, salt, email,
+        phone, sex, age, status,
+        create_time, update_time, last_login_time ,dept_id,salary,userpost,description
+        from t_user
+        where id = #{id}
+    </select>
+
+  <!--查询所有人员列表-->
+  <select id="selectUserList" resultMap="BaseResultMaps">
+    SELECT u.t_user_id,
+           u.username,
+           u.password,
+           u.salt,
+           u.email,
+           u.phone,
+           u.sex,
+           u.age,
+           u.status,
+           u.create_time,
+           u.update_time,
+           u.last_login_time,
+           u.name,
+           u.company,
+           u.engname,
+           u.question,
+           u.answer,
+           u.img,
+           u.dept_id,
+           u.salary,
+           u.userpost,
+           u.description,
+           u.team_id,
+           rl_dept.dept_name
+           FROM t_user AS u  LEFT JOIN rl_dept ON u.dept_id=rl_dept.dept_id WHERE u.status=1
+  </select>
+
+    <!--添加员工-->
+    <insert id="addUser" parameterType="com.rl.model.UserEntity">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tUserId != null">
+                t_user_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="company != null">
+                company,
+            </if>
+            <if test="engname != null">
+                engname,
+            </if>
+            <if test="question != null">
+                question,
+            </if>
+            <if test="answer != null">
+                answer,
+            </if>
+            <if test="img != null">
+                img,
+            </if>
+            <if test="deptId != null">
+                dept_id,
+            </if>
+            <if test="salary != null">
+                salary,
+            </if>
+            <if test="userpost != null">
+                userpost,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="teamId != null">
+                team_id
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="tUserId != null">
+                #{tUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="engname != null">
+                #{engname,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null">
+                #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="deptId != null">
+                #{deptId,jdbcType=INTEGER},
+            </if>
+            <if test="salary != null">
+                #{salary,jdbcType=DECIMAL},
+            </if>
+            <if test="userpost != null">
+                #{userpost,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="teamId != null">
+                #{teamId,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="addUserRole" parameterType="String">
+        insert
+        into t_user_role
+        (t_user_id,role_id) VALUES
+        (#{tUserId},#{roleId});
+    </insert>
+
+    <!--修改员工基本信息-->
+    <update id="updateUserByEmId" parameterType="com.rl.model.UserEntity">
+        update t_user
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="engname != null">
+                engname = #{engname,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null">
+                question = #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId,jdbcType=INTEGER},
+            </if>
+            <if test="salary != null">
+                salary = #{salary,jdbcType=DECIMAL},
+            </if>
+            <if test="userpost != null">
+                userpost = #{userpost,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description=#{description,jdbcType=VARCHAR},
+            </if>
+            <if test="teamId != null">
+                #{team_id,jdbcType=INTEGER},
+            </if>
+        </set>
+        where t_user_id = #{tUserId}
+    </update>
+
+    <!--删除员工-->
+    <delete id="deleteUserById" parameterType="String">
+        UPDATE t_user
+        SET status=2
+        WHERE t_user_id=#{tUserId}
+    </delete>
+
+    <!--查询员工详情-->
+    <select id="selectUserByIds" parameterType="String" resultMap="BaseResultMaps">
+         SELECT u.t_user_id,
+               u.username,
+               u.password,
+               u.salt,
+               u.email,
+               u.phone,
+               u.sex,
+               u.age,
+               u.status,
+               u.create_time,
+               u.update_time,
+               u.last_login_time,
+               u.name,
+               u.company,
+               u.engname,
+               u.question,
+               u.answer,
+               u.img,
+               u.dept_id,
+               u.salary,
+               u.userpost,
+               u.description,
+               u.team_id
+              FROM t_user AS u WHERE u.t_user_id=#{tUserId} AND u.status=1
+    </select>
+
+    <!--按照姓名或者部门id搜索-->
+    <select id="selectUserByNameDeptName" resultMap="BaseResultMap3">
+        SELECT
+        u.t_user_id,
+        u.username,
+        u.password,
+        u.salt,
+        u.email,
+        u.phone,
+        u.sex,
+        u.age,
+        u.status,
+        u.create_time,
+        u.update_time,
+        u.last_login_time,
+        u.name,
+        u.company,
+        u.engname,
+        u.question,
+        u.answer,
+        u.img,
+        u.dept_id,
+        u.salary,
+        u.userpost,
+        u.description,
+        u.team_id,
+        r.dept_id,
+        r.dept_name,
+        r.dept_address,
+        r.dept_company
+        from t_user u join rl_dept r on u.dept_id = r.dept_id
+        <where>
+        <if test="name!=null and name!=''">
+            and u.name like '%${name}%'
+        </if>
+        <if test="deptName != null and deptName!=''">
+            and r.dept_name = #{deptName}
+        </if>
+        </where>
+    </select>
+
+    <!--员工列表分页-->
+    <select id="selectUserLists" resultMap="BaseResultMaps">
+       SELECT u.t_user_id,
+           u.username,
+           u.password,
+           u.salt,
+           u.email,
+           u.phone,
+           u.sex,
+           u.age,
+           u.status,
+           u.create_time,
+           u.update_time,
+           u.last_login_time,
+           u.name,
+           u.company,
+           u.engname,
+           u.question,
+           u.answer,
+           u.img,
+           u.dept_id,
+           u.salary,
+           u.userpost,
+           u.description,
+           u.team_id
+          FROM t_user AS u WHERE u.status=1
+    </select>
+
+    <!--用户名密码查询用户-->
+    <select id="selectUserByUsernameAndPassword" parameterType="String" resultMap="BaseResultMaps">
+    SELECT u.id,
+           u.t_user_id,
+           u.username,
+           u.password,
+           u.salt,
+           u.email,
+           u.phone,
+           u.sex,
+           u.age,
+           u.status,
+           u.create_time,
+           u.update_time,
+           u.last_login_time,
+           u.name,
+           u.company,
+           u.engname,
+           u.question,
+           u.answer,
+           u.img,
+           u.dept_id,
+           u.salary,
+           u.userpost,
+           u.description,
+           u.team_id
+          FROM t_user AS u WHERE u.username=#{username} AND u.password=#{password} AND u.status=1;
+    </select>
+
+    <!--查询员工图片-->
+    <select id="selectUserImg" resultMap="BaseResultMaps">
+        SELECT u.img,
+               u.t_user_id FROM t_user AS u
+    </select>
+
+    <!--查询共享文件数量-->
+    <select id="selectSharedFileCount" resultType="integer">
+        SELECT COUNT(f.file_id) FROM sys_fileupload as f
+    </select>
+
+    <!--查询我的上传数量-->
+    <select id="selectUploadCount" parameterType="String" resultType="Integer">
+        SELECT COUNT(s.file_id) FROM sys_fileupload AS s WHERE s.t_user_id=#{tUserId}
+    </select>
+
+    <!--查询近期删除数量-->
+    <select id="selectDeleteCount" parameterType="String" resultType="Integer">
+         SELECT COUNT(s.file_id) FROM sys_fileupload AS s WHERE s.t_user_id=#{tUserId} AND s.file_status=0
+    </select>
+
+    <!--查询所有人员列表-->
+    <select id="selectAllUserList" resultMap="BaseResultMaps">
+        SELECT u.t_user_id,
+               u.username,
+               u.password,
+               u.salt,
+               u.email,
+               u.phone,
+               u.sex,
+               u.age,
+               u.status,
+               u.create_time,
+               u.update_time,
+               u.last_login_time,
+               u.name,
+               u.company,
+               u.engname,
+               u.question,
+               u.answer,
+               u.img,
+               u.dept_id,
+               u.salary,
+               u.userpost,
+               u.description,
+               u.team_id
+          FROM t_user AS u
+    </select>
+
+    <!--查询角色id-->
+    <select id="selectRoleId" parameterType="string" resultType="string">
+        SELECT t.role_id FROM t_user_role AS t WHERE t.t_user_id=#{tUserId}
+    </select>
+
+    <!--查询所有员工并首字母符赋值-->
+    <select id="selectAllUserDto" resultMap="BaseResult">
+       SELECT  u.t_user_id,
+               u.username,
+               u.password,
+               u.salt,
+               u.email,
+               u.phone,
+               u.sex,
+               u.age,
+               u.status,
+               u.create_time,
+               u.update_time,
+               u.last_login_time,
+               u.name,
+               u.company,
+               u.engname,
+               u.question,
+               u.answer,
+               u.img,
+               u.dept_id,
+               u.salary,
+               u.userpost,
+               u.description,
+               u.team_id
+          FROM t_user AS u
+    </select>
+
+    <!--修改用户头像-->
+    <update id="UploadImg" parameterType="String">
+         UPDATE t_user
+        <set>
+            <if test="img != null">
+             img = #{fileName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE t_user_id = #{tUserId,jdbcType=VARCHAR}
+    </update>
+</mapper>

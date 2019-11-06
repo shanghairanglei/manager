@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.HonorMapper">
+  <resultMap id="BaseResultMap" type="com.rl.model.Honor">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    <result column="honor" jdbcType="VARCHAR" property="honor" />
+    <result column="honor_time" jdbcType="TIMESTAMP" property="honorTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, t_user_id, honor, honor_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rl_honor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rl_honor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rl.model.Honor">
+    insert into rl_honor (id, t_user_id, honor, 
+      honor_time)
+    values (#{id,jdbcType=INTEGER}, #{tUserId,jdbcType=VARCHAR}, #{honor,jdbcType=VARCHAR}, 
+      #{honorTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.model.Honor">
+    insert into rl_honor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tUserId != null">
+        t_user_id,
+      </if>
+      <if test="honor != null">
+        honor,
+      </if>
+      <if test="honorTime != null">
+        honor_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tUserId != null">
+        #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="honor != null">
+        #{honor,jdbcType=VARCHAR},
+      </if>
+      <if test="honorTime != null">
+        #{honorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rl.model.Honor">
+    update rl_honor
+    <set>
+      <if test="tUserId != null">
+        t_user_id = #{tUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="honor != null">
+        honor = #{honor,jdbcType=VARCHAR},
+      </if>
+      <if test="honorTime != null">
+        honor_time = #{honorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rl.model.Honor">
+    update rl_honor
+    set t_user_id = #{tUserId,jdbcType=VARCHAR},
+      honor = #{honor,jdbcType=VARCHAR},
+      honor_time = #{honorTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,249 @@
+/* nav */
+.logo{
+	width: 193px;
+	height: 93px;
+	margin: -33px 6px;
+}
+
+.navbar-brand{
+	background: #FFFFFF;
+}
+.sidebar-collapse{
+	margin-top: 35px;
+	background-color:#FFFFFF;
+	color: #FFFFFF;
+}
+.top-navbar .nav > li > a {
+	color: #999999
+}
+.active-menu {
+	background-color: #FFFFFF!important;
+	color: #000000;
+}
+.sidebar-collapse .nav > li > a {
+	color: #2B447C;
+	background: transparent;
+	text-shadow: none;
+	margin-left: 33px;
+}
+.navbar-toggle {
+	border: 1px solid #A3A3A3;
+}
+.navbar-toggle .icon-bar {
+	border: 1px solid #A3A3A3;
+}
+.navbar-header {
+	background: #FFFFFF;
+}
+.sidebar-collapse .nav > li > a >cite {
+	margin-left: 10px;
+}
+.base-index{
+	height: 72px;
+	background: #FFFFFF;
+	position: relative;
+}
+@media (min-width: 768px){
+	.navbar-nav.navbar-right:last-child {
+		margin-right: 40px;
+	}
+}
+.sidebar-collapse .nav > li > a > span {
+	font-size: 26px;
+}
+.sidebar-collapse .nav > li > a >cite {
+	margin-left: 10px;
+	font-size: 16px;
+}
+.Crumbs{
+	width: 100%;
+	/*border-top: 1px solid #DCDCDC;*/
+	margin: 43px 212px;
+}
+.nav-click{
+	border-top: 1px solid #F9F7F8;
+	border-bottom: 1px solid #F9F7F8;
+	border-right: 5px solid #87BDDC;
+	color: #87BDDC;
+}
+/* center */
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+	border-bottom-width: 1px;
+	text-align: center;
+}
+@media (min-width: 768px){
+	.navbar-nav.navbar-right:last-child {
+		margin-right: 40px;
+		height: 40px;
+	}
+	.edit{
+		margin-left: 26%;
+	}
+}
+.navbar-text{
+	color: #999999;
+	font-size: 14px;
+	margin-left: 62px;
+}
+.breadcrumb{
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #F5F5FA;
+}
+.table-top2{
+	width:50px;
+	height:23px;
+	color: #458BCA;
+	border:1px solid #458BCA;
+	border-radius:12px;
+	text-align: center;
+}
+.table-top3{
+	width:115px;
+	height:23px;
+	color: #458BCA;
+	border:1px solid #458BCA;
+	border-radius:12px;
+	text-align: center;
+}
+.table-top4{
+	width:115px;
+	height:23px;
+	color: #458BCA;
+	border:1px solid #458BCA;
+	border-radius:12px;
+	text-align: center;
+	margin: 0px 0px;
+}
+.table-top5{
+	width:115px;
+	height:23px;
+	color: #458BCA;
+	border:1px solid #458BCA;
+	border-radius:12px;
+	text-align: center;
+	margin: 0px 0px;
+}
+.edit{
+	color: #458BCA;
+	cursor: pointer;
+}
+.delete{
+	color: #FF0400;
+	cursor: pointer;
+}
+/* right */
+@media (min-width: 1024px){
+	.right-font {
+		width: 100%;
+	}
+}
+.right {
+	height: 100%;
+	overflow: hidden;
+	border: 1px solid #f6f6f6;
+	background: #FFFFFF;
+}
+
+.img-circle {
+	width: 60px;
+	height: 60px;
+}
+.right-font {
+	margin: 10px 0px;
+}
+li {
+	list-style: none;
+}
+.dl-horizontal {
+	padding-top: 5px;
+	text-decoration: none;
+}
+.right .right-span {
+	display: block;
+	margin-top: 17px;
+}
+.img-rounded {
+	width:75px;
+	height:93px;
+	border-radius: 6px;
+	margin-top: 3px;
+}
+@media (min-width:768px) and (max-width:1366px){
+	.img-rounded {
+		width: 70px;
+		height: 85px;
+		border-radius: 6px;
+	}
+}
+.page-top{
+	width: 100%;
+}
+.tex-left{
+	height: 19px;
+	border-left: 2px solid #003366;
+	padding-top: 0px;
+	margin: -1px 5px;
+}
+@media (min-width: 768px){
+	.dl-horizontal dt {
+		float: left;
+		width: auto;
+		overflow: hidden;
+		clear: left;
+		text-align: right;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		/* border-left: 3px solid #003366; */
+		font-size: 18px;
+	}
+	.submit1{
+		margin: 1px 10px;
+	}
+}
+.plan>a{
+	margin-left: 5px;
+}
+.submit1 {
+	width: 110px;
+	height: 35px;
+	border: 1px solid #5295CE;
+	border-radius: 20px 20px 20px 20px;
+	text-align: center;
+	line-height: 35px;
+	font-size: 18px;
+	color: #FFFFFF;
+	cursor: pointer;
+	background-image: linear-gradient(90deg,#FFFFFF,#FFFFFF),linear-gradient(90deg,#000,#4f93cd);
+	background: -webkit-linear-gradient(left, #FFFFFF , #4f93cd);
+	background: -o-linear-gradient(right, #FFFFFF, #4f93cd);
+	background: -moz-linear-gradient(right, #FFFFFF, #4f93cd);
+	background: linear-gradient(to right, #FFFFFF , #4f93cd);
+}
+a:link,a:visited,a:hover,a:active {
+	text-decoration:none;
+}
+/* .Confirm-box{
+	font-size: 18px;
+	color: #2B447C;
+}
+.Confirm-box span{
+	padding-right: 10px;
+}
+.dropdown-menu{
+	width: 136px;
+}
+.brief-introduction {
+	width: 64%;
+	margin: 0 auto;
+} */
+.confirm-box{
+	font-size: 18px;
+	color: #2B447C;
+	position: relative;
+	top: 270px;
+	margin-left: 64px;
+}
+.brief-introduction {
+	width: 80%;
+	margin: 0 auto;
+}

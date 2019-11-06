@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.mapper.performancemapper.PerformanceMapper">
+    <resultMap id="BaseResultMap" type="com.rl.model.Workplans">
+        <id column="wp_id" jdbcType="INTEGER" property="wpId" />
+        <result column="wp_name" jdbcType="VARCHAR" property="wpName" />
+        <result column="wp_startTime" jdbcType="TIMESTAMP" property="wpStarttime" />
+        <result column="wp_endTime" jdbcType="TIMESTAMP" property="wpEndtime" />
+        <result column="wp_content" jdbcType="VARCHAR" property="wpContent" />
+        <result column="wp_keypoint" jdbcType="INTEGER" property="wpKeypoint" />
+        <result column="wp_prospect_performance" jdbcType="INTEGER" property="wpProspectPerformance" />
+        <result column="wp_actual_performance" jdbcType="INTEGER" property="wpActualPerformance" />
+        <result column="wp_remark" jdbcType="VARCHAR" property="wpRemark" />
+        <result column="wp_createDate" jdbcType="TIMESTAMP" property="wpCreatedate" />
+        <result column="wp_status" jdbcType="INTEGER" property="wpStatus" />
+        <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="file_id" jdbcType="INTEGER" property="fileId" />
+        <result column="check_point" jdbcType="INTEGER" property="checkPoint" />
+        <result column="if_summary" jdbcType="INTEGER" property="ifSummary" />
+    </resultMap>
+
+    <resultMap id="BaseResult" type="com.rl.dto.UserDto">
+        <id column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="salt" jdbcType="VARCHAR" property="salt" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="engname" jdbcType="VARCHAR" property="engname" />
+        <result column="question" jdbcType="VARCHAR" property="question" />
+        <result column="answer" jdbcType="VARCHAR" property="answer" />
+        <result column="img" jdbcType="VARCHAR" property="img" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+        <result column="salary" jdbcType="DECIMAL" property="salary" />
+        <result column="userpost" jdbcType="VARCHAR" property="userpost" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="firstUpperCase" jdbcType="VARCHAR" property="firstUpperCase" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+       wp_id, wp_name, wp_startTime, wp_endTime, wp_content, wp_keypoint, wp_prospect_performance,
+    wp_actual_performance, wp_remark, wp_createDate, wp_status, t_user_id, file_id, check_point,
+    if_summary
+    </sql>
+    <!--个人绩效查询-->
+    <select id="selectPerformanceList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rl_workplans
+        WHERE t_user_id = #{tUserId,jdbcType=VARCHAR} AND if_summary=1
+    </select>
+
+    <!--查询所属部门-->
+    <select id="selectDepetName" parameterType="String" resultType="String">
+        SELECT dept_name FROM rl_dept AS r LEFT JOIN t_user AS t ON r.dept_id=t.dept_id WHERE t.t_user_id=#{tUserId}
+    </select>
+
+    <!--员工身份查询个人工作计划-->
+    <select id="selectWorkPlansBytUserId" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rl_workplans
+        WHERE t_user_id = #{tUserId,jdbcType=VARCHAR} AND wp_createDate BETWEEN #{Starttime} AND #{Endtime} AND if_summary=1
+        ORDER BY wp_createDate
+    </select>
+
+
+    <!--折线图查询个人绩效(月)-->
+    <select id="selectUserDetailPerformance" resultType="com.rl.dto.PerformanceDto">
+         SELECT  date_format(wp_createDate,'%Y-%u') AS wpCreate,
+         sum(wp_actual_performance) AS actualCountPerformance,
+         sum(check_point) AS checkPointCount ,
+         sum(wp_prospect_performance) AS prospectCount FROM rl_workplans
+         WHERE t_user_id = #{tUserId,jdbcType=VARCHAR} AND wp_createDate BETWEEN #{Starttime} AND #{Endtime} AND if_summary=1
+         GROUP BY date_format(wp_createDate,'%Y-%u') ORDER BY date_format(wp_createDate,'%Y-%u') limit 0,#{total,jdbcType=INTEGER}
+    </select>
+    <!--折线图查询个人绩效(年)-->
+    <select id="selectUserDetailPerformanceByYear" resultType="com.rl.dto.PerformanceDto">
+         SELECT  date_format(wp_createDate,'%Y-%m') AS wpCreate,
+         sum(wp_actual_performance) AS actualCountPerformance,
+         sum(check_point) AS checkPointCount,
+         sum(wp_prospect_performance) AS prospectCount FROM rl_workplans
+         WHERE t_user_id = #{tUserId,jdbcType=VARCHAR} AND wp_createDate BETWEEN #{Starttime} AND #{Endtime} AND if_summary=1
+         GROUP BY date_format(wp_createDate,'%Y-%m') ORDER BY date_format(wp_createDate,'%Y-%m') limit 0,#{total,jdbcType=INTEGER}
+    </select>
+    <!--折线图查询个人绩效(周)-->
+    <select id="selectUserDetailPerformanceByWeek" resultType="com.rl.dto.PerformanceDto">
+         SELECT  date_format(wp_createDate,'%Y-%m-%d') AS wpCreate,
+         sum(wp_actual_performance) AS actualCountPerformance,
+         sum(check_point) AS checkPointCount ,
+         sum(wp_prospect_performance) AS prospectCount FROM rl_workplans
+         WHERE t_user_id = #{tUserId,jdbcType=VARCHAR} AND wp_createDate BETWEEN #{Starttime} AND #{Endtime} AND if_summary=1
+         GROUP BY date_format(wp_createDate,'%Y-%m-%d') ORDER BY date_format(wp_createDate,'%Y-%m-%d') limit 0,#{total,jdbcType=INTEGER}
+    </select>
+    <!--根据姓名查询用户-->
+    <select id="searchUserByName" parameterType="string" resultMap="BaseResult">
+        SELECT u.t_user_id,
+               u.username,
+               u.password,
+               u.salt,
+               u.email,
+               u.phone,
+               u.sex,
+               u.age,
+               u.status,
+               u.create_time,
+               u.update_time,
+               u.last_login_time,
+               u.name,
+               u.company,
+               u.engname,
+               u.question,
+               u.answer,
+               u.img,
+               u.dept_id,
+               u.salary,
+               u.userpost,
+               u.description
+          FROM t_user AS u WHERE u.name=#{name};
+    </select>
+
+    <!--查询个人工作计划条数-->
+    <select id="getWorkPlansSum" parameterType="string" resultType="int">
+        SELECT
+        COUNT(t_user_id)
+        FROM rl_workplans
+        WHERE t_user_id = #{tUserId} AND wp_createDate BETWEEN #{Starttime} AND #{Endtime} AND if_summary=1
+        ORDER BY wp_createDate
+    </select>
+
+
+    <!--查询个人所有工作计划条数-->
+    <select id="getAllWorkplansCount" parameterType="string" resultType="int">
+         SELECT
+        COUNT(t_user_id)
+        FROM rl_workplans
+        WHERE t_user_id = #{tUserId} AND if_summary=1
+    </select>
+</mapper>

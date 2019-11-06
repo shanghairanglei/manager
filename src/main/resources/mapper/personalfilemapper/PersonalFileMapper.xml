@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rl.mapper.personalfilemapper.PersonalFileMapper" >
+    <resultMap id="BaseResultMap" type="com.rl.model.Fileupload">
+        <id column="file_id" jdbcType="INTEGER" property="fileId" />
+        <result column="file_createDate" jdbcType="TIMESTAMP" property="fileCreatedate" />
+        <result column="file_deleteDate" jdbcType="TIMESTAMP" property="fileDeletedate" />
+        <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+        <result column="file_readAccount" jdbcType="INTEGER" property="fileReadaccount" />
+        <result column="file_priority" jdbcType="INTEGER" property="filePriority" />
+        <result column="file_kinds" jdbcType="INTEGER" property="fileKinds" />
+        <result column="file_status" jdbcType="INTEGER" property="fileStatus" />
+        <result column="action_id" jdbcType="INTEGER" property="actionId" />
+        <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+        <result column="file_uploader" jdbcType="VARCHAR" property="fileUploader" />
+        <result column="t_user_id" jdbcType="VARCHAR" property="tUserId" />
+    </resultMap>
+    <!--我的文件上传列表-->
+    <select id="selectFileListByemId" parameterType="integer" resultMap="BaseResultMap">
+        SELECT f.file_id,
+               f.file_createDate,
+               f.file_deleteDate,
+               f.file_path,
+               f.file_readAccount,
+               f.file_priority,
+               f.file_kinds,
+               f.file_status,
+               f.action_id,
+               f.file_name,
+               f.file_uploader,
+               f.em_id FROM
+               sys_fileupload AS f WHERE em_id=#{emId} AND file_status=1
+    </select>
+
+    <!--删除文件-->
+    <update id="deleteFileByFileId" parameterType="integer">
+        UPDATE sys_fileupload SET file_status=0 WHERE file_id=#{fileId}
+    </update>
+
+    <!--删除文件,恢复文件后添加该文件的操作记录-->
+    <insert id="addActionRecord" parameterType="com.rl.model.ActionRecord">
+      insert into rl_action_record (action_id, action_time, action_kinds,
+      action_name, file_id)
+      values (#{actionId,jdbcType=INTEGER}, #{actionTime,jdbcType=TIMESTAMP}, #{actionKinds,jdbcType=INTEGER},
+      #{actionName,jdbcType=VARCHAR}, #{fileId,jdbcType=INTEGER})
+    </insert>
+
+</mapper>

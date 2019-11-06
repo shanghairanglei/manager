@@ -1,0 +1,140 @@
+.plan {
+	width: 95px;
+	font-size: 18px;
+	border-left: 4px solid #003366;
+}
+.plan>a {
+	margin-left: 15px;
+}
+.dl-horizontal{
+	margin-left: 15px;
+}
+
+.main{
+	margin-left: 10px;
+	background: #FFFFFF;
+	border-radius: 5px;
+	box-shadow:0px 8px 13px 0px rgba(145,120,255,0.09);
+	border-radius:10px;
+}
+.main .row{
+	padding-top:20px;
+}
+.activea{
+	background: #003366;
+	color: #FFFFFF;
+}
+.nav-team li{
+	width: 114px;
+	height: 36px;
+	border: 1px solid #ececec;
+	text-align: center;
+	line-height: 36px;
+	border-radius: 20px;
+	float: left;
+	margin-left: 15px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.articles{
+	width: 94%;
+	margin: 0 auto;
+	margin-top: 58px;
+}
+.articles2{
+	margin-bottom: 8px;
+}
+.articles-one{
+	/* width: 182px; */
+	border-right: 1px solid #000000;
+	font-size: 18px;
+	color: #999999;
+}
+.articles-oneright{
+	font-size: 14px;
+	color: #999999;
+	text-align: left;
+	/* margin-left: 35px; */
+}
+@media (min-width:768px) {
+	.articles-one{
+		width: 182px;
+		border-right: 1px solid #000000;
+		font-size: 18px;
+	}
+	.articles-oneright{
+		margin-left: 86px;
+	}
+	.core>div{
+		margin-top: 30px;
+	}
+}
+.articles-card{
+	width:251px;
+	height:367px;
+	box-shadow:0px 6px 12px 0px #ececec;
+	border-radius:10px;
+	margin: 0 auto;
+}
+.img{
+	width: 100%;
+	height: 300px;
+	overflow: hidden;
+	border-radius:10px 10px 0px 0px;
+}
+.img img{
+	width: 100%;
+	height: 300px;
+	border-radius: 10px 10px 0px 0px;
+}
+.name{
+	font-size: 18px;
+}
+.post{
+	font-size: 14px;
+}
+@media screen and (min-width: 768px) {
+	.articles-card {
+		width: auto;
+		height: 289px;
+	}
+	.img {
+		width: 100%;
+		height: 207px;
+	}
+	.img img {
+		width: 100%;
+		height: 220px;
+		border-radius: 10px 10px 0px 0px;
+	}
+}
+@media screen and (max-width: 1366px){
+	.articles-card {
+		width: 100%;
+		height: 269px;
+	}
+}
+
+@media screen and (min-width:1367px) {
+	.articles-card{
+		width:100%;
+		height:367px;
+	}
+	.img{
+		width: 100%;
+		height: 85%;
+		border-radius: 20px 20px 0px 0px;
+	}
+	.img img{
+		width: 100%;
+		height: 96%;
+		border-radius: 20px 20px 0px 0px;
+	}
+	.articles-oneright{
+		margin-left: 35px;
+	}
+}
+.panel-default {
+	box-shadow:0px 8px 13px 0px rgba(145,120,255,0.09);
+	border-radius:10px;
+}
