@@ -417,6 +417,7 @@
 								<div class="col-sm-3 col-md-3 col-xs-6" th:each="user : ${pageInfo.list}">
 									<div class="card-c">
 										<div class="blue">
+											<img th:src="${user.img}" class="imgaa">
 											<div class="text-left gg" th:if="${user.sex} eq 1">GG</div>
 											<div class="text-left mm" th:if="${user.sex} eq 2">MM</div>
 											<div class="spot">...</div>
