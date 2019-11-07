@@ -119,6 +119,7 @@
 								<tr th:each="work : ${pageInfo.list}" class="worklist">
 									<input type="hidden" id="mess" value=""/>
 									<td th:text="${work.name}" id="username">姓名</td>
+									<!--<td th:text="${work.count}" id="count">工作计划数量</td>-->
 									<td th:text="${work.wpName}" id="wpName">文件标题</td>
 									<td th:text="${work.wpCreatedate}" id="workCreateDate">上传日期</td>
 									<td>
@@ -162,6 +163,7 @@
 													aria-hidden="true">×
 											</button>
 											<h4 class="modal-title" id="myModalLabel">
+												<!--<img src="/static/img/logo.jpg">-->
 											</h4>
 										</div>
 										<div class="modal-body">
@@ -199,17 +201,20 @@
 														</th>
 													</tr>
 													</thead>
-														<tbody id="detail">
-														</tbody>
+													<tbody id="detail">
+
+													</tbody>
+
 												</table>
 											</div>
 										</div>
+
 										<div class="modal-footer">
 											<button type="button" class="btn btn-info"
 													data-dismiss="modal">关闭
 											</button>
 											<button type="button" class="btn btn-primary" id="disabled">提交</button>
-											<button th:if="${session.roleId} eq 5" type="button" class="btn btn-danger" id="check">审核</button>
+											<button th:if="(${session.roleId} eq 3) or (${session.roleId} eq 5)" type="button" class="btn btn-danger" id="check">审核</button>
 										</div>
 									</div><!-- /.modal-content -->
 								</div><!-- /.modal-dialog -->
@@ -222,15 +227,17 @@
 					<div class="right">
 						<div class="row" th:each="user,state:${userList}">
 							<div class="col-xs-12">
-								<div class="col-xs-1">
-									<img th:src="@{${user.img}}" class="img-circle">
-								</div>
-								<div class="col-xs-8">
-									<ul class="right-font">
-										<li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
-										<li th:text="${user.userpost}">UI工程师</li>
-									</ul>
-								</div>
+								<a th:href="@{'/team/Individual?tUserId='+${user.tUserId}}">
+									<div class="col-xs-1">
+										<img th:src="@{${user.img}}" class="img-circle">
+									</div>
+									<div class="col-xs-8">
+										<ul class="right-font">
+											<li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
+											<li th:text="${user.userpost}">UI工程师</li>
+										</ul>
+									</div>
+								</a>
 								<div class="col-xs-2">
 									<a th:href="@{'#'+${state.count}}" aria-expanded="false" data-toggle="collapse"
 									   class="collapsed">

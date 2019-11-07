@@ -151,6 +151,9 @@
 .right-font {
 	margin: 10px 0px;
 }
+.right-font li {
+	color: black;
+}
 li {
 	list-style: none;
 }

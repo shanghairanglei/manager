@@ -164,15 +164,17 @@
 						<div class="right">
 							<div class="row" th:each="user,state:${userList}">
 								<div class="col-xs-12">
-									<div class="col-xs-1">
-										<img th:src="@{${user.img}}" class="img-circle">
-									</div>
-									<div class="col-xs-8">
-										<ul class="right-font">
-											<li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
-											<li th:text="${user.userpost}">UI工程师</li>
-										</ul>
-									</div>
+									<a th:href="@{'/team/Individual?tUserId='+${user.tUserId}}">
+										<div class="col-xs-1">
+											<img th:src="@{${user.img}}" class="img-circle">
+										</div>
+										<div class="col-xs-8">
+											<ul class="right-font">
+												<li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
+												<li th:text="${user.userpost}">UI工程师</li>
+											</ul>
+										</div>
+									</a>
 									<div class="col-xs-2">
 										<a th:href="@{'#'+${state.count}}" aria-expanded="false" data-toggle="collapse"
 										   class="collapsed">
