@@ -17,6 +17,12 @@
     <result column="file_id" jdbcType="INTEGER" property="fileId" />
     <result column="check_point" jdbcType="INTEGER" property="checkPoint" />
     <result column="if_summary" jdbcType="INTEGER" property="ifSummary" />
+    <result column="self_test_performance" jdbcType="INTEGER" property="selfTestPerformance" />
+    <result column="self_actual_performance" jdbcType="INTEGER" property="selfActualPerformance" />
+    <result column="management_weight" jdbcType="INTEGER" property="managementWeight" />
+    <result column="management_performance" jdbcType="INTEGER" property="managementPerformance" />
+    <result column="self_total_performance" jdbcType="INTEGER" property="selfTotalPerformance" />
+    <result column="total_performance" jdbcType="INTEGER" property="totalPerformance" />
   </resultMap>
   <resultMap id="BaseResultMaps" type="com.rl.vo.UserWorkPlans">
     <id column="wp_id" jdbcType="INTEGER" property="wpId" />

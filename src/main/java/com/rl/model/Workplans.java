@@ -35,6 +35,18 @@ public class Workplans {
 
     private Integer ifSummary;
 
+    private Integer selfTestPerformance;
+
+    private Integer selfActualPerformance;
+
+    private Integer managementWeight;
+
+    private Integer managementPerformance;
+
+    private Integer selfTotalPerformance;
+
+    private Integer totalPerformance;
+
     public Integer getWpId() {
         return wpId;
     }
@@ -153,5 +165,53 @@ public class Workplans {
 
     public void setIfSummary(Integer ifSummary) {
         this.ifSummary = ifSummary;
+    }
+
+    public Integer getSelfTestPerformance() {
+        return selfTestPerformance;
+    }
+
+    public void setSelfTestPerformance(Integer selfTestPerformance) {
+        this.selfTestPerformance = selfTestPerformance;
+    }
+
+    public Integer getSelfActualPerformance() {
+        return selfActualPerformance;
+    }
+
+    public void setSelfActualPerformance(Integer selfActualPerformance) {
+        this.selfActualPerformance = selfActualPerformance;
+    }
+
+    public Integer getManagementWeight() {
+        return managementWeight;
+    }
+
+    public void setManagementWeight(Integer managementWeight) {
+        this.managementWeight = managementWeight;
+    }
+
+    public Integer getManagementPerformance() {
+        return managementPerformance;
+    }
+
+    public void setManagementPerformance(Integer managementPerformance) {
+        this.managementPerformance = managementPerformance;
+    }
+
+    public Integer getSelfTotalPerformance() {
+        return selfTotalPerformance;
+    }
+
+    public void setSelfTotalPerformance(Integer selfTotalPerformance) {
+        this.selfTotalPerformance = selfTotalPerformance;
+    }
+
+    public Integer getTotalPerformance() {
+        return totalPerformance;
+    }
+
+    public void setTotalPerformance(Integer totalPerformance) {
+        this.totalPerformance = totalPerformance;
     }
 }
