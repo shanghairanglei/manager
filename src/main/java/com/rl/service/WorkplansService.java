@@ -35,10 +35,13 @@ public interface WorkplansService {
     int insertWork(UserWorkPlans workplans);
 
     //添加工作计划总结
-    int updateWork(@Param("wpActualPerformance") Integer wpActualPerformance,@Param("wpId") Integer wpId);
+    int updateWork(@Param("wpActualPerformance") Integer wpActualPerformance,@Param("wpId") Integer wpId,
+                   @Param(value="selfTestPerformance") Integer selfTestPerformance, @Param(value="selfActualPerformance") Integer selfActualPerformance);
 
     //修改审核点
-    int updateKeypoint(@Param("wpId") Integer wpId,@Param("checkPoint") Integer checkPoint);
+    int updateKeypoint(@Param("wpId") Integer wpId,@Param("checkPoint") Integer checkPoint,
+                       @Param("managementWeight") Integer managementWeight,@Param("managementPerformance") Integer managementPerformance,
+                       @Param("selfTotalPerformance") Integer selfTotalPerformance,@Param("totalPerformance") Integer totalPerformance);
 
     PageInfo<Summary> findWorkByIdNameDate(@Param("wpName")String wpName, @Param("file_createDate1") String createDate1,
                                            @Param("file_createDate2")String createDate2,

@@ -78,20 +78,21 @@ public class WorkplansServiceImpl implements WorkplansService {
     }
 
     @Override
-    public int updateWork(Integer wpActualPerformance,Integer wpId) {
-        return workplansMapper.updateWork(wpActualPerformance,wpId);
+    public int updateWork(Integer wpActualPerformance,Integer wpId,Integer selfTestPerformance,Integer selfActualPerformance) {
+        return workplansMapper.updateWork(wpActualPerformance,wpId,selfTestPerformance,selfActualPerformance);
     }
 
     @Override
-    public int updateKeypoint(Integer wpId,Integer checkPoint) {
-        return workplansMapper.updateKeypoint(wpId,checkPoint);
+    public int updateKeypoint(Integer wpId,Integer checkPoint,Integer managementWeight,Integer managementPerformance,
+                              Integer selfTotalPerformance,Integer totalPerformance) {
+        return workplansMapper.updateKeypoint(wpId,checkPoint,selfTotalPerformance,totalPerformance,managementPerformance,managementWeight);
     }
 
     @Override
     public PageInfo<Summary> findWorkByIdNameDate(String wpName,String file_createDate1,
-                                                        String file_createDate2,
-                                                        Integer pageNum,
-                                                        Integer pageSize) {
+                                                  String file_createDate2,
+                                                  Integer pageNum,
+                                                  Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<Summary> userWorkPlansList=workplansMapper.findWorkByIdNameDate(wpName,file_createDate1,file_createDate2,pageNum,pageSize);
         PageInfo<Summary> pageInfo = new PageInfo<>(userWorkPlansList,5);

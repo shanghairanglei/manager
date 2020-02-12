@@ -7,6 +7,7 @@ import com.rl.vo.UserWorkPlans;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.File;
 import java.util.Date;
@@ -40,11 +41,14 @@ public interface WorkplansMapper {
     int insertWork(UserWorkPlans workplans);
 
     //添加工作计划总结(下午提交实际绩效点)
-    int updateWork(@Param("wpActualPerformance") Integer wpActualPerformance,@Param("wpId") Integer wpId);
+    int updateWork(@Param("wpActualPerformance") Integer wpActualPerformance, @Param("wpId") Integer wpId,
+                   @Param(value="selfTestPerformance") Integer selfTestPerformance, @Param(value="selfActualPerformance") Integer selfActualPerformance);
 
     //修改审核点(领导)
-    int updateKeypoint(@Param("wpId") Integer wpId,@Param("checkPoint") Integer checkPoint);
-    
+    int updateKeypoint(@Param("wpId") Integer wpId,@Param("checkPoint") Integer checkPoint,
+                       @Param("managementWeight") Integer managementWeight,@Param("managementPerformance") Integer managementPerformance,
+                       @Param("selfTotalPerformance") Integer selfTotalPerformance,@Param("totalPerformance") Integer totalPerformance);
+
     //按照标题和时间查找自己的工作计划
     List<Summary> findWorkByIdNameDate(@Param("wpName") String wpName,
                                        @Param("file_createDate1") String file_createDate1,

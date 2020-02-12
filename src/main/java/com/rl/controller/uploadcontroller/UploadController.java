@@ -43,11 +43,11 @@ public class UploadController {
     public String findWorkById(Model model,String wpName ,String file_createDate1,String file_createDate2,
                                @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
                                @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
-            //拼接字符串
-            String file_createDate11 = file_createDate1+" 00:00:00";
-            String file_createDate22 = file_createDate2+" 23:59:59";
-            if(file_createDate1==null || file_createDate1 ==""){
-                file_createDate11 = "2000/01/01 00:00:00";
+        //拼接字符串
+        String file_createDate11 = file_createDate1+" 00:00:00";
+        String file_createDate22 = file_createDate2+" 23:59:59";
+        if(file_createDate1==null || file_createDate1 ==""){
+            file_createDate11 = "2000/01/01 00:00:00";
         }
         if(file_createDate2==null || file_createDate2 ==""){
             file_createDate22 = GlobleService.getDateString(new Date())+" 23:59:59";
@@ -138,7 +138,7 @@ public class UploadController {
         Map<String,Object> map=new HashMap<>();
         List<UserWorkPlans> workPlansList=workplansService.getWorkPlansDetailList(tUserId,wpCreatedate);
         map.put("workPlansList",workPlansList);
-       return map;
+        return map;
     }
 
     /**
@@ -147,7 +147,8 @@ public class UploadController {
      */
     @ResponseBody
     @RequestMapping("/addActual")
-    public Map<String,Object> updateWork(HttpServletRequest request,@RequestParam(value="wpIds[]")Integer[] wpIds, @RequestParam(value="wpActualPerformances[]") Integer[] wpActualPerformances){
+    public Map<String,Object> updateWork(HttpServletRequest request,@RequestParam(value="wpIds[]")Integer[] wpIds, @RequestParam(value="wpActualPerformances[]") Integer[] wpActualPerformances,
+                                         @RequestParam(value="selfTestPerformance[]") Integer[] selfTestPerformance,@RequestParam(value="selfActualPerformance[]") Integer[] selfActualPerformance){
         Map<String,Object> map = new HashMap<>();
         UserEntity user = (UserEntity) request.getSession().getAttribute("user");
 
@@ -159,7 +160,7 @@ public class UploadController {
             }else {
                 UserWorkPlans workplans = workplansService.findOneWork(wpIds[i]);
                 if(workplans.getWpActualPerformance() == 0){
-                    int result = workplansService.updateWork(wpActualPerformances[i], wpIds[i]);
+                    int result = workplansService.updateWork(wpActualPerformances[i], wpIds[i],selfTestPerformance[i],selfActualPerformance[i]);
                     map.put("msg","提交完毕！");
                     map.put("result", result);
                 }else {
@@ -178,10 +179,12 @@ public class UploadController {
      */
     @ResponseBody
     @RequestMapping("/keyPoint")
-    public Map<String,Integer> updateKeypoint(@RequestParam("wpIds[]") Integer[] wpIds,@RequestParam("checkPoints[]") Integer[] checkPoints){
+    public Map<String,Integer> updateKeypoint(@RequestParam("wpIds[]") Integer[] wpIds,@RequestParam("checkPoints[]") Integer[] checkPoints,
+                                              @RequestParam("managementWeight[]") Integer[] managementWeight,@RequestParam("managementPerformance[]") Integer[] managementPerformance,
+                                              @RequestParam("selfTotalPerformance[]") Integer[] selfTotalPerformance,@RequestParam("totalPerformance[]") Integer[] totalPerformance){
         Map<String,Integer> map = new HashMap<>();
         for(int i=0;i<wpIds.length;i++) {
-            int result = workplansService.updateKeypoint(wpIds[i], checkPoints[i]);
+            int result = workplansService.updateKeypoint(wpIds[i], checkPoints[i],managementWeight[i],managementPerformance[i],selfTotalPerformance[i],totalPerformance[i]);
             map.put("result",result);
         }
         return map;

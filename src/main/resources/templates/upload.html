@@ -29,7 +29,7 @@
 			</button>
 			<a class="navbar-brand"><img src="/static/img/logo.jpg" class="logo"></a>
 		</div>
-		<p class="navbar-text .visible-xs-block">早上好，欢迎来到让雷科技</p>
+		<p class="navbar-text .visible-xs-block">早上好，欢迎来到让雷科技!</p>
 		<ul class="nav navbar-nav navbar-right base-nav">
 			<li><a href=""  class="timeaa"><span class="iconfont">&#xe663;</span></a></li>
 			<li><a th:href="@{'/performance/personalCenter?tUserId='+${session.user.tUserId}+'&roleId='+${session.roleId}}"><span class="iconfont">&#xe647;</span> 我的绩效</a></li>
@@ -78,9 +78,7 @@
 			<div class="row">
 				<div class="col-md-9 col-sm-12 col-xs-12">
 					<div class="panel panel-default">
-
 						<div class="panel-heading middle-bottom">
-
 							<form action="/upload/findWork" method="post">
 								<div class="row">
 									<div class="col-md-3">
@@ -99,13 +97,11 @@
 											<input type="submit" class="submit1" value="搜索" />
 										</dl>
 									</div>
-
 								</div>
 							</form>
-
 						</div>
 						<div class="panel-body">
-							<table class="table">
+							<table class="table table-bordered table-condensed table-responsive">
 								<thead>
 								<tr>
 									<th>姓名</th>
@@ -154,6 +150,8 @@
 									</ul>
 								</div>
 							</div>
+
+
 							<!-- 模态框（Modal） -->
 							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
@@ -168,7 +166,7 @@
 										</div>
 										<div class="modal-body">
 											<div class="table-responsive">
-												<table class="table">
+												<table class="table table-bordered table-condensed table-responsive">
 													<caption><h4>上海让雷智能科技有限公司  员工计划表</h4></caption>
 													<thead>
 													<tr>
@@ -181,7 +179,7 @@
 														<th>
 															<div>时间</div>
 														</th>
-														<th>
+														<th class="contentaa">
 															<div>工作计划内容</div>
 														</th>
 														<th>
@@ -201,10 +199,9 @@
 														</th>
 													</tr>
 													</thead>
-													<tbody id="detail">
+													<tbody id="detail" class="detail">
 
 													</tbody>
-
 												</table>
 											</div>
 										</div>
@@ -283,14 +280,14 @@
                 $.each(detailList,function(index,n){
                     count++;
                     html+="<tr><td id='wpId' style='display: none'>"+detailList[index].wpId;
-                    html+="</td><td id='number'>"+count;
-                    html+="</td><td id='time'>"+detailList[index].wpStarttime+'-'+detailList[index].wpEndtime;
+                    html+="</td><td id='number' class='timeqwe'>"+count;
+                    html+="</td><td id='time' class='timeqwe'>"+detailList[index].wpStarttime+'-'+detailList[index].wpEndtime;
                     html+="</td><td class='other' id='wpContent'>"+detailList[index].wpContent;
-                    html+="</td><td id='wpKeypoint'>"+detailList[index].wpKeypoint;
-                    html+="</td><td id='wpProspectPerformance'>"+detailList[index].wpProspectPerformance;
-                    html+="</td><td><input type='text' class='form-control modal-Actual' id='wpActualPerformance' value='"+detailList[index].wpActualPerformance;
+                    html+="</td><td id='wpKeypoint' class='timeqwe'>"+detailList[index].wpKeypoint;
+                    html+="</td><td id='wpProspectPerformance' class='timeqwe'>"+detailList[index].wpProspectPerformance;
+                    html+="</td><td class='timeqwe'><input type='text' class='form-control modal-Actual' id='wpActualPerformance' value='"+detailList[index].wpActualPerformance;
                     html+="'";
-                    html+="/></td><td><input type='text' class='form-control modal-Actual' id='checkPoint' value='"+detailList[index].checkPoint;
+                    html+="/></td><td class='timeqwe'><input type='text' class='form-control modal-Actual' id='checkPoint' value='"+detailList[index].checkPoint;
                     html+="'";
                     html+="/></td><td class='other1' id='wpRemark'>"+detailList[index].wpRemark;
                     html+="</td></tr>";
@@ -324,6 +321,9 @@
             data:{
                 "wpIds":wpIds,
                 "wpActualPerformances":wpActualPerformances
+//				,
+//				"selfTestPerformance":selfTestPerformance,
+//                "selfActualPerformance":selfActualPerformance,
             },
             url:"/upload/addActual",
             contentType:"application/x-www-form-urlencoded",
@@ -354,6 +354,11 @@
             data:{
                 "wpIds":wpIds,
                 "checkPoints":checkPoints
+//				,
+//                "managementWeight":managementWeight,
+//                "managementPerformance":managementPerformance,
+//                "selfTotalPerformance":selfTotalPerformance,
+//                "totalPerformance":totalPerformance
             },
             url:"/upload/keyPoint",
             contentType:"application/x-www-form-urlencoded",

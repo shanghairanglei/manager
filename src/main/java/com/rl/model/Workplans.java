@@ -35,17 +35,71 @@ public class Workplans {
 
     private Integer ifSummary;
 
+    //自测绩效评估
     private Integer selfTestPerformance;
 
+    //实际绩效评估
     private Integer selfActualPerformance;
 
+    //管理权重
     private Integer managementWeight;
 
+    //管理绩效测评
     private Integer managementPerformance;
 
+    //自测总绩效
     private Integer selfTotalPerformance;
 
+    //管理总绩效
     private Integer totalPerformance;
+
+    public Integer getSelfTestPerformance() {
+        return this.selfTestPerformance;
+    }
+
+    public void setSelfTestPerformance(Integer selfTestPerformance) {
+        this.selfTestPerformance = selfTestPerformance;
+    }
+
+    public Integer getSelfActualPerformance() {
+        return this.selfActualPerformance;
+    }
+
+    public void setSelfActualPerformance(Integer selfActualPerformance) {
+        this.selfActualPerformance = selfActualPerformance;
+    }
+
+    public Integer getManagementWeight() {
+        return this.managementWeight;
+    }
+
+    public void setManagementWeight(Integer managementWeight) {
+        this.managementWeight = managementWeight;
+    }
+
+    public Integer getManagementPerformance() {
+        return this.managementPerformance;
+    }
+
+    public void setManagementPerformance(Integer managementPerformance) {
+        this.managementPerformance = managementPerformance;
+    }
+
+    public Integer getSelfTotalPerformance() {
+        return this.selfTotalPerformance;
+    }
+
+    public void setSelfTotalPerformance(Integer selfTotalPerformance) {
+        this.selfTotalPerformance = selfTotalPerformance;
+    }
+
+    public Integer getTotalPerformance() {
+        return this.totalPerformance;
+    }
+
+    public void setTotalPerformance(Integer totalPerformance) {
+        this.totalPerformance = totalPerformance;
+    }
 
     public Integer getWpId() {
         return wpId;
@@ -165,53 +219,5 @@ public class Workplans {
 
     public void setIfSummary(Integer ifSummary) {
         this.ifSummary = ifSummary;
-    }
-
-    public Integer getSelfTestPerformance() {
-        return selfTestPerformance;
-    }
-
-    public void setSelfTestPerformance(Integer selfTestPerformance) {
-        this.selfTestPerformance = selfTestPerformance;
-    }
-
-    public Integer getSelfActualPerformance() {
-        return selfActualPerformance;
-    }
-
-    public void setSelfActualPerformance(Integer selfActualPerformance) {
-        this.selfActualPerformance = selfActualPerformance;
-    }
-
-    public Integer getManagementWeight() {
-        return managementWeight;
-    }
-
-    public void setManagementWeight(Integer managementWeight) {
-        this.managementWeight = managementWeight;
-    }
-
-    public Integer getManagementPerformance() {
-        return managementPerformance;
-    }
-
-    public void setManagementPerformance(Integer managementPerformance) {
-        this.managementPerformance = managementPerformance;
-    }
-
-    public Integer getSelfTotalPerformance() {
-        return selfTotalPerformance;
-    }
-
-    public void setSelfTotalPerformance(Integer selfTotalPerformance) {
-        this.selfTotalPerformance = selfTotalPerformance;
-    }
-
-    public Integer getTotalPerformance() {
-        return totalPerformance;
-    }
-
-    public void setTotalPerformance(Integer totalPerformance) {
-        this.totalPerformance = totalPerformance;
     }
 }

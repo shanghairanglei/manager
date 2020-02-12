@@ -29,7 +29,7 @@ public class WorkPlanController {
     private UserService userService;
     @RequestMapping("/go")
     public String go(@Param("deptId") HttpServletRequest request,Model model){
-       UserEntity user =  (UserEntity)request.getSession().getAttribute("user");
+        UserEntity user =  (UserEntity)request.getSession().getAttribute("user");
         List<UserDto> userList=userService.selectAllUserDto();
         //查询所有img对应的路径
         for(UserDto u:userList){
@@ -72,20 +72,21 @@ public class WorkPlanController {
     @ResponseBody
     public Map<String,Object> wirteWork( HttpServletRequest request,@RequestBody List<UserWorkPlans> workPlanList){
         Map<String,Object> map = new HashMap<>();
-       UserEntity user = (UserEntity) request.getSession().getAttribute("user");
+        UserEntity user = (UserEntity) request.getSession().getAttribute("user");
         for (UserWorkPlans workPlans :workPlanList ) {
             workPlans.setWpName(workPlans.getWpName()+ GlobleService.getDateString(new Date()));
             workPlans.settUserId(user.gettUserId());
             workPlans.setWpCreatedate(new Date());
-            workPlans.setWpStatus(0);//提交为审核中工作计划
-            workPlans.setIfSummary(0);//不是工作总结
+            //提交为审核中工作计划
+            workPlans.setWpStatus(0);
+            //不是工作总结
+            workPlans.setIfSummary(0);
             if(workPlans.getWpRemark() == null){
                 workPlans.setWpRemark("");
             }
             Integer result = workplansService.insertWork(workPlans);
             map.put("result",result);
         }
-        //map.put("result","res");
         return map;
     }
 

@@ -49,7 +49,22 @@
 	margin: 52px -49px;
 	text-align: center;
 }
-
+/*.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {*/
+/*padding: 2px;*/
+/*line-height: 1.42857143;*/
+/*vertical-align: top;*/
+/*border-top: 1px solid #ddd;*/
+/*}*/
+/*.contentaa {*/
+/*width: 200px !important;*/
+/*}*/
+.detail tr td{
+	height: 30px;
+	/*padding: 0;*/
+}
+.modal-Actual {
+	height: 22px;
+}
 .name1{
 	font-size: 30px;
 }
@@ -159,13 +174,15 @@
 		margin-left: 4px;
 	}
 	.modal-Actual{
-		width: 50px;
-		margin-left: 17px;
+		width: 40px;
+		margin: 0 auto;
 	}
 	@media (min-width: 768px){
 		.modal-dialog {
-			width: 977px;
-			margin: 30px auto;
+			width: 100%;
+			height: 100%;
+			margin: 0 auto;
+			position: fixed;
 		}
 	}
 	.lay{
@@ -298,8 +315,8 @@
 	cursor: pointer;
 }
 .other {
-	width: 300px;
-	max-width: 300px;
+	width: 600px;
+	max-width: 600px;
 	height: 40px;
 	word-wrap: break-word;
 	word-break: normal;
@@ -310,4 +327,10 @@
 	height: 40px;
 	word-wrap: break-word;
 	word-break: normal;
+}
+.modal-footer {
+	border-top: 1px solid #FFFFFF;
+}
+.timeqwe {
+	width: 60px;
 }

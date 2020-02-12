@@ -19,6 +19,7 @@ input[type="date"] {
         width: 120px;
     }
 }
+
 @media (min-width:768px) {
     .upoad1{
         width: 150px;
@@ -34,7 +35,7 @@ input[type="date"] {
 
 }
 .upoad1{
-    margin: -33px 69px;
+    margin: -31px 42px;
 }
 .panel-default>.panel-heading {
     color: #666666;
@@ -260,6 +261,7 @@ textarea{
         overflow: hidden;
         display: block;
         transform: translateX(18px);
+        margin: 8px 0px 0px -10px;
     }
 
     .content {
@@ -295,7 +297,7 @@ textarea{
     }
 }
 .content{
-    height: 100px;
+    /*height: 100px;*/
     text-align: center;
 }
 .content select{
@@ -307,4 +309,36 @@ textarea{
     height: 30px;
     border-radius: 10px;
     border: 1px solid #E9E9E9;
+}
+.select2 {
+    width: 41px;
+    background: #f9f9f9;
+    color: #5f9fd1;
+    font-size: 18px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-align: center;
+    padding: 0 13px;
+}
+@media screen and (max-width: 768px) {
+    .upoadd1 {
+        width: 47px;
+    }
+    .wpRemark {
+        width: 50px;
+        margin-left: 20px;
+    }
+    .select2 {
+        margin-left: 10px;
+    }
+    .wpContent {
+        width: 45px;
+    }
+}
+.relative-bottom {
+    margin-top: 84px;
+}
+.flxex {
+    display: flex;
 }

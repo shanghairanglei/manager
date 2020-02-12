@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
+<head>
+	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>工作计划</title>
 	<link href="/static/css/bootstrap.css" rel="stylesheet" />
@@ -11,338 +11,338 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/workday.css"/>
 	<script src="/static/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/static/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-	  <script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
 	<!--[if lt IE 9]>
-				 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-				 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
-  </head>
-  <body>
-		<div id="wrapper">
-			<!-- top -->
-			<nav class="navbar top-navbar base-index" role="navigation">
-			    <div class="navbar-header">
-			        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-			            <span class="sr-only">Toggle navigation</span>
-			            <span class="icon-bar"></span>
-			            <span class="icon-bar"></span>
-			            <span class="icon-bar"></span>
-			        </button>
-			        <a class="navbar-brand"><img src="/static/img/logo.jpg" class="logo"></a>
-			    </div>
-				<p class="navbar-text .visible-xs-block">早上好，欢迎来到让雷科技  !</p>
-				<ul class="nav navbar-nav navbar-right base-nav">
-					<li><a href=""  class="timeaa"><span class="iconfont">&#xe663;</span></a></li>
-					<li><a th:href="@{'/performance/personalCenter?tUserId='+${session.user.tUserId}+'&roleId='+${session.roleId}}"><span class="iconfont">&#xe647;</span> 我的绩效</a></li>
-					<li><a href="/personal/go"><img th:src="@{${session.user.img}}" style="border-radius: 50%; width: 30px;height: 30px;margin-right: 10px;">个人中心</a></li>
-				</ul>
-				<div class="Crumbs">
-					<ul class="breadcrumb">
-						<li><a href="#">让雷科技</a></li>
-						<li class="active">工作计划</li>
-					</ul>
+</head>
+<body>
+<div id="wrapper">
+	<!-- top -->
+	<nav class="navbar top-navbar base-index" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand"><img src="/static/img/logo.jpg" class="logo"></a>
+		</div>
+		<p class="navbar-text .visible-xs-block">早上好，欢迎来到让雷科技  !</p>
+		<ul class="nav navbar-nav navbar-right base-nav">
+			<li><a href=""  class="timeaa"><span class="iconfont">&#xe663;</span></a></li>
+			<li><a th:href="@{'/performance/personalCenter?tUserId='+${session.user.tUserId}+'&roleId='+${session.roleId}}"><span class="iconfont">&#xe647;</span> 我的绩效</a></li>
+			<li><a href="/personal/go"><img th:src="@{${session.user.img}}" style="border-radius: 50%; width: 30px;height: 30px;margin-right: 10px;">个人中心</a></li>
+		</ul>
+		<div class="Crumbs">
+			<ul class="breadcrumb">
+				<li><a href="#">让雷科技</a></li>
+				<li class="active">工作计划</li>
+			</ul>
+		</div>
+	</nav>
+	<nav class="navbar-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav" id="main-menu">
+				<li>
+					<a class="active-menu" href="/upload/findWork"><span class="iconfont">&#xe64f;</span>
+						<cite>计划总结</cite></a>
+				</li>
+				<li class="nav-click">
+					<a class="active-menu" href="/workplan/go"><span class="iconfont">&#xe663;</span> <cite>工作计划</cite></a>
+				</li>
+				<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 3) or (${session.roleId} eq 5)">
+					<a class="active-menu" href="/performance/checkRole"><span class="iconfont">&#xe647;</span>
+						<cite>绩效统计</cite></a>
+				</li>
+				<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 5)">
+					<a class="active-menu" href="/user/go"><span class="iconfont">&#xe68f;</span>
+						<cite>人员管理</cite></a>
+				</li>
+				<li>
+					<a class="active-menu" href="/team/go"><span class="iconfont">&#xe610;</span>
+						<cite>团队介绍</cite></a>
+				</li>
+			</ul>
+
+		</div>
+
+	</nav>
+	<!-- /. NAV SIDE  -->
+	<div id="page-wrapper">
+		<div id="page-inner">
+			<div class="row">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading middle-bottom">
+							<div class="row name-date">
+								<div class="col-md-2 col-xs-6">
+									<dl class="dl-horizontal">
+										<dt class="plan" ><span id="wpName">&nbsp;<a  id="wpNames" th:text="${session.user.name}"></a>的工作计划</span></dt>
+									</dl>
+								</div>
+								<div class="col-md-3 col-xs-6 col-md-offset-5 col-lg-offset-6">
+									<div class="data-right">
+										<label>部门</label>
+										<input class="form-control upoad1" id="deptName" th:value="${session.userDept.deptName}" disabled style="background: white"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<ul id='timeline'>
+								<li class='work works'>
+									<div class="relative">
+										<span class='circle'></span>
+									</div>
+									<div class='content'>
+										<div class="row">
+											<div class="col-md-2 col-xs-2">
+												<h5>1、时间</h5>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<h5>工作内容</h5>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<h5>权重点</h5>
+											</div>
+											<div class="col-md-2 col-xs-3">
+												<h5>自测绩效点</h5>
+											</div>
+											<div class="col-md-1 col-xs-2">
+												<h5>备注</h5>
+											</div>
+											<div class="col-md-3"></div>
+										</div>
+										<div class="row">
+											<div class="col-md-2 col-xs-2">
+												<input type="text" class="form-cntrol upoadd1 wpStarttime" placeholder="">-
+												<input type="text" class="form-cntrol upoadd1 wpEndtime" placeholder="">
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<textarea class="form-control textContent wpContent"  name="work_describe" rows="1" placeholder="工作任务"></textarea>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<select name="right_focus" id="wpKeypoint" class="tooltip-show select1 wpKeypoint"  data-placement="bottom">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+												</select>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<select name="self_performance"  class="select2 wpProspectPerformance">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+											</div>
+											<div class="col-md-3 col-xs-2">
+												<textarea class="form-control remarkContent wpRemark"  name="remarks" rows="1" placeholder="请写备注"></textarea>
+											</div>
+										</div>
+
+									</div>
+								</li>
+							</ul>
+							<!--<p class='work'>-->
+							<div class="relative">
+							</div>
+							<div class='relative-bottom'>
+								<div class="col-xs-2 col-md-2">
+									<div class="bottom-h6">添加工作任务</div>
+								</div>
+								<div class="col-xs-7 col-xs-offset-3 col-md-4 col-md-offset-6 col-lg-4 col-lg-offset-6 flxex">
+									<input type="submit" class="submit1" value="提交">
+									<input data-target="#myModal" data-toggle="modal" type="reset" class="submit2" name="" value="我要重写" />
+								</div>
+							</div>
+							<!--</p>-->
+						</div>
+					</div>
 				</div>
-			</nav>
-			<nav class="navbar-side" role="navigation">
-			    <div class="sidebar-collapse">
-			        <ul class="nav" id="main-menu">
-						<li>
-							<a class="active-menu" href="/upload/findWork"><span class="iconfont">&#xe64f;</span>
-								<cite>计划总结</cite></a>
-						</li>
-						<li class="nav-click">
-							<a class="active-menu" href="/workplan/go"><span class="iconfont">&#xe663;</span> <cite>工作计划</cite></a>
-						</li>
-						<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 3) or (${session.roleId} eq 5)">
-							<a class="active-menu" href="/performance/checkRole"><span class="iconfont">&#xe647;</span>
-								<cite>绩效统计</cite></a>
-						</li>
-						<li th:if="(${session.roleId} eq 2) or (${session.roleId} eq 5)">
-							<a class="active-menu" href="/user/go"><span class="iconfont">&#xe68f;</span>
-								<cite>人员管理</cite></a>
-						</li>
-						<li>
-							<a class="active-menu" href="/team/go"><span class="iconfont">&#xe610;</span>
-								<cite>团队介绍</cite></a>
-						</li>
-			        </ul>
-			
-			    </div>
-			
-			</nav>
-			<!-- /. NAV SIDE  -->
-			<div id="page-wrapper">
-				<div id="page-inner">
-					<div class="row">
-						<div class="col-md-9 col-sm-12 col-xs-12">
-							<div class="panel panel-default">
-								<div class="panel-heading middle-bottom">
-										<div class="row name-date">
-												<div class="col-md-2 col-xs-6">
-													<dl class="dl-horizontal">
-													  <dt class="plan" ><span id="wpName">&nbsp;<a  id="wpNames" th:text="${session.user.name}"></a>的工作计划</span></dt>
-													</dl>
-												</div>
-											<div class="col-md-3 col-xs-6 col-md-offset-5 col-lg-offset-6">
-												<div class="data-right">
-													<label>部门</label>
-													<input class="form-control upoad1" id="deptName" th:value="${session.userDept.deptName}" disabled style="background: white"/>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<ul id='timeline'>
-											<li class='work works'>
-												<div class="relative">
-													<span class='circle'></span>
-												</div>
-												<div class='content'>
-													<div class="row">
-														<div class="col-md-2 col-xs-2">
-																<h5>1、时间</h5>
-														</div>
-														<div class="col-md-2 col-xs-2">
-															<h5>工作内容</h5>
-														</div>
-														<div class="col-md-2 col-xs-2">
-															<h5>权重点</h5>
-														</div>
-														<div class="col-md-2 col-xs-2">
-															<h5>自测绩效点</h5>
-														</div>
-														<div class="col-md-1 col-xs-2">
-															<h5>备注</h5>
-														</div>
-														<div class="col-md-3"></div>
-													</div>
-													<div class="row">
-														<div class="col-md-2 col-xs-2">
-															<input type="text" class="form-cntrol upoadd1 wpStarttime" placeholder="">-
-															<input type="text" class="form-cntrol upoadd1 wpEndtime" placeholder="">
-														</div>
-														<div class="col-md-2 col-xs-2">
-															<textarea class="form-control textContent wpContent"  name="work_describe" rows="1" placeholder="工作任务"></textarea>
-														</div>
-														<div class="col-md-2 col-xs-2">
-															<select name="right_focus" id="wpKeypoint" class="tooltip-show select1 wpKeypoint"  data-placement="bottom">
-																<option value="1">1</option>
-																<option value="2">2</option>
-																<option value="3">3</option>
-																<option value="4">4</option>
-																<option value="5">5</option>
-															</select>
-														</div>
-														<div class="col-md-2 col-xs-2">
-															<select name="self_performance"  class="select1 wpProspectPerformance">
-																<option value="1">1</option>
-																<option value="2">2</option>
-																<option value="3">3</option>
-																<option value="4">4</option>
-																<option value="5">5</option>
-																<option value="6">6</option>
-																<option value="7">7</option>
-																<option value="8">8</option>
-																<option value="9">9</option>
-																<option value="10">10</option>
-															</select>
-														</div>
-														<div class="col-md-3 col-xs-2">
-															<textarea class="form-control remarkContent wpRemark"  name="remarks" rows="1" placeholder="请写备注"></textarea>
-														</div>
-													</div>
 
-												</div>
-											</li>
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="right">
+						<div class="row" th:each="user,state:${userList}">
+							<div class="col-xs-12">
+								<a th:href="@{'/team/Individual?tUserId='+${user.tUserId}}">
+									<div class="col-xs-1 col-md-1">
+										<img th:src="@{${user.img}}" class="img-circle">
+									</div>
+									<div class="col-xs-8 col-md-8">
+										<ul class="right-font">
+											<li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
+											<li th:text="${user.userpost}">UI工程师</li>
 										</ul>
-										<!--<p class='work'>-->
-										<div class="relative">
-										</div>
-										<div class=''>
-											<div class="col-xs-2 col-md-2">
-												<div class="bottom-h6">添加工作任务</div>
-											</div>
-											<div class="col-xs-2 col-xs-offset-2 col-md-4 col-md-offset-6 col-lg-4 col-lg-offset-6">
-												<input type="submit" class="submit1" value="提交">
-												<input data-target="#myModal" data-toggle="modal" type="reset" class="submit2" name="" value="我要重写" />
-											</div>
-										</div>
-										<!--</p>-->
 									</div>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-sm-12 col-xs-12">
-							<div class="right">
-								<div class="row" th:each="user,state:${userList}">
-									<div class="col-xs-12">
-										<a th:href="@{'/team/Individual?tUserId='+${user.tUserId}}">
-											<div class="col-xs-1 col-md-1">
-												<img th:src="@{${user.img}}" class="img-circle">
-											</div>
-											<div class="col-xs-8 col-md-8">
-												<ul class="right-font">
-													<li th:text="${user.name}+'('+${user.engname}+')'">翁少锋（Steven）</li>
-													<li th:text="${user.userpost}">UI工程师</li>
-												</ul>
-											</div>
-										</a>
-										<div class="col-xs-2 col-md-2">
-											<a th:href="@{'#'+${state.count}}" aria-expanded="false" data-toggle="collapse"
-											   class="collapsed">
-												<font style="vertical-align: inherit;">
+								</a>
+								<div class="col-xs-2 col-md-2">
+									<a th:href="@{'#'+${state.count}}" aria-expanded="false" data-toggle="collapse"
+									   class="collapsed">
+										<font style="vertical-align: inherit;">
                                                <span class="iconfont right-span tooltip-show"
-												   data-placement="bottom">&#xe64b;</span>
-												</font>
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-12">
-										<ul th:id="${state.count}" class="list-unstyled collapse" style="">
-												<p class="brief-introduction" th:text="${user.description}">白少</p>
-										</ul>
-									</div>
+													 data-placement="bottom">&#xe64b;</span>
+										</font>
+									</a>
 								</div>
 							</div>
+							<div class="col-xs-12">
+								<ul th:id="${state.count}" class="list-unstyled collapse" style="">
+									<p class="brief-introduction" th:text="${user.description}">白少</p>
+								</ul>
+							</div>
 						</div>
-						<!--清除数据模态框-->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="sumbitText modal-body">
-										<p>是否确定要清除所有工作计划?</p>
-									</div>
-									<div class="modal-footer">
-										<a href="#"><p data-dismiss="modal">关闭</p></a>
-										<a href="#"><p data-dismiss="modal" id="check">确定</p></a>
-									</div>
-								</div>
+					</div>
+				</div>
+				<!--清除数据模态框-->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="sumbitText modal-body">
+								<p>是否确定要清除所有工作计划?</p>
+							</div>
+							<div class="modal-footer">
+								<a href="#"><p data-dismiss="modal">关闭</p></a>
+								<a href="#"><p data-dismiss="modal" id="check">确定</p></a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script src="/static/js/iconfont.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/static/js/show.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			  var tUserId;
-			  var roleId;
-			  $(document).ready(function(){
-				  $.ajax({
-					  type : "POST", //提交方式
-					  url : "/Login/getSessionMessage",//路径
-					  data : {
-					  },
-                      contentType : "application/json",
-					  dataType:"json",
-					  success : function(data) {//返回数据根据结果进行相应的处理
-                          tUserId=data.user.tUserId.toString();
-                          roleId=data.roleId.toString();
-                          $("#checkRole").attr("href","/performance/checkRole?tUserId="+tUserId+"&roleId="+roleId);
-					  },
-					  error:function () {
-						  alert("返回消息失败");
-					  }
-				  });
-			  });
-		  </script>
-  </body>
-  <script src="/static/js/message.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript">
-      var count =1;
+	</div>
+</div>
+<script src="/static/js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/show.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var tUserId;
+    var roleId;
+    $(document).ready(function(){
+        $.ajax({
+            type : "POST", //提交方式
+            url : "/Login/getSessionMessage",//路径
+            data : {
+            },
+            contentType : "application/json",
+            dataType:"json",
+            success : function(data) {//返回数据根据结果进行相应的处理
+                tUserId=data.user.tUserId.toString();
+                roleId=data.roleId.toString();
+                $("#checkRole").attr("href","/performance/checkRole?tUserId="+tUserId+"&roleId="+roleId);
+            },
+            error:function () {
+                alert("返回消息失败");
+            }
+        });
+    });
+</script>
+</body>
+<script src="/static/js/message.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var count =1;
 
-      $(".bottom-h6").click(function(){
-          count++;
-          var htm="";
-          htm += "<li class='work works'>";
-          htm += "<div class='relative'><span class='circle'></span></div>";
-          htm += "<div class='content'>";
-          htm += "<div class='row'>";
-          htm += "<div class='col-md-2'><h5>"+count+"、时间</h5></div>";
-          htm += "<div class='col-md-2'><h5>工作内容</h5></div>";
-          htm += "<div class='col-md-2'><h5>权重点</h5></div>";
-          htm += "<div class='col-md-2'><h5>自测绩效点</h5></div>";
-          htm += "<div class='col-md-1'><h5>备注</h5><span class='dateDel'>×</span></div>";
-          htm += "<div class='col-md-3'></div></div>";
-          htm += "<div class='row'>";
-          htm += "<div class='col-md-2'><input type='text' class='form-cntrol upoadd1 wpStarttime'>- <input type='text' class='form-cntrol upoadd1 wpEndtime'></div>";
-          htm += "<div class='col-md-2'><p><textarea class='form-control textContent wpContent' name='work_describe' rows='1' placeholder='工作任务'></textarea></p ></div>";
-          htm += "<div class='col-md-2'><select class='select1 wpKeypoint'   name='right_focus'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select></div>";
-          htm += "<div class='col-md-2'><select class='select1 wpProspectPerformance'  name='self_performance' ><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option></select></div>";
-          htm += "<div class='col-md-3'><textarea class='form-control remarkContent' rows='1' id='wpRemark' name='remarks' placeholder='请写备注'></textarea></div>";
-          $('#timeline').append(htm);
-          //删除表格
-          $(".dateDel").on("click", function() {
-              $(this).closest('.work').remove();
-          })
-          $(".textContent").each(function(i){
-              $(this).attr('id',"textContent"+$(this).index(".textContent"));
-          })
-          $(".remarkContent").each(function(i){
-              $(this).attr('id',"remarkContent"+$(this).index(".remarkContent"));
-          })
-      });
-             //点击提交
-             $(".panel-body").on("click",".submit1",function(){
-                 var workPlanList=new Array();
-                var arr=[];
-                var arr2=[];
-                var arr3=[];
-                /*var arr4=[];*/
-                var arr5=[];
-                var arr6=[];
-                var arr7=[];
-                var wpName = $("#wpName").text();
-                 $(".wpContent").each(function(i){
-                     arr[i]=$(this).val()
-                 });
-                 $(".wpKeypoint").each(function(i){
-                     arr2[i]=$(this).val()
-                 });
-                 $(".wpProspectPerformance").each(function(i){
-                     arr3[i]=$(this).val()
-                 });
-                 $(".remarkContent").each(function(i){
-                     arr5[i]=$(this).val()
-                 });
-                 $(".wpStarttime").each(function(i){
-                     arr6[i]=$(this).val()
-                 });
-                 $(".wpEndtime").each(function(i){
-                     arr7[i]=$(this).val()
-                 });
-                 for(var i=0;i<arr.length;i++){
-                     var s =new Object();
-                     s.wpName=wpName;
-                     s.wpContent=arr[i];
-                     s.wpKeypoint=arr2[i];
-                     s.wpProspectPerformance=arr3[i]
-                     s.wpRemark=arr5[i];
-                     s.wpStarttime=arr6[i];
-                     s.wpEndtime=arr7[i];
-                     workPlanList.push(s)
-				 }
-				 console.log(workPlanList)
-					 $.ajax({
-						 type : "POST", //提交方式
-						 url :"/workplan/wirteWork",//路径
-						 data : JSON.stringify(workPlanList),
-						 contentType : "application/json",
-                         traditional: true,
-						 dataType:"json",
-						 success:function (data) {
-							 alert("提交成功,快开始今天的工作吧!");
-						 },
-						 error:function () {}
-					 })
-			  });
-  </script>
-  <script>
-      $(document).on("click","#check",function(){
-          $(".textContent").val("")
+    $(".bottom-h6").click(function(){
+        count++;
+        var htm="";
+        htm += "<li class='work works'>";
+        htm += "<div class='relative'><span class='circle'></span></div>";
+        htm += "<div class='content'>";
+        htm += "<div class='row'>";
+        htm += "<div class='col-md-2 col-xs-2'><h5>"+count+"、时间</h5></div>";
+        htm += "<div class='col-md-2 col-xs-2'><h5>工作内容</h5></div>";
+        htm += "<div class='col-md-2 col-xs-2'><h5>权重点</h5></div>";
+        htm += "<div class='col-md-2 col-xs-3'><h5>自测绩效点</h5></div>";
+        htm += "<div class='col-md-1 col-xs-2'><h5>备注</h5><span class='dateDel'>×</span></div>";
+        htm += "</div>";
+        htm += "<div class='row'>";
+        htm += "<div class='col-md-2 col-xs-2'><input type='text' class='form-cntrol upoadd1 wpStarttime'>- <input type='text' class='form-cntrol upoadd1 wpEndtime'></div>";
+        htm += "<div class='col-md-2 col-xs-2'><textarea class='form-control textContent wpContent' name='work_describe' rows='1' placeholder='工作任务'></textarea></div>";
+        htm += "<div class='col-md-2 col-xs-2'><select class='select1 wpKeypoint'   name='right_focus'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select></div>";
+        htm += "<div class='col-md-2 col-xs-2'><select class='select2 wpProspectPerformance'  name='self_performance' ><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option></select></div>";
+        htm += "<div class='col-md-3 col-xs-2'><textarea class='form-control remarkContent wpRemark' rows='1' id='wpRemark' name='remarks' placeholder='请写备注'></textarea></div>";
+        $('#timeline').append(htm);
+        //删除表格
+        $(".dateDel").on("click", function() {
+            $(this).closest('.work').remove();
+        })
+        $(".textContent").each(function(i){
+            $(this).attr('id',"textContent"+$(this).index(".textContent"));
+        })
+        $(".remarkContent").each(function(i){
+            $(this).attr('id',"remarkContent"+$(this).index(".remarkContent"));
+        })
+    });
+    //点击提交
+    $(".panel-body").on("click",".submit1",function(){
+        var workPlanList=new Array();
+        var arr=[];
+        var arr2=[];
+        var arr3=[];
+        /*var arr4=[];*/
+        var arr5=[];
+        var arr6=[];
+        var arr7=[];
+        var wpName = $("#wpName").text();
+        $(".wpContent").each(function(i){
+            arr[i]=$(this).val()
+        });
+        $(".wpKeypoint").each(function(i){
+            arr2[i]=$(this).val()
+        });
+        $(".wpProspectPerformance").each(function(i){
+            arr3[i]=$(this).val()
+        });
+        $(".remarkContent").each(function(i){
+            arr5[i]=$(this).val()
+        });
+        $(".wpStarttime").each(function(i){
+            arr6[i]=$(this).val()
+        });
+        $(".wpEndtime").each(function(i){
+            arr7[i]=$(this).val()
+        });
+        for(var i=0;i<arr.length;i++){
+            var s =new Object();
+            s.wpName=wpName;
+            s.wpContent=arr[i];
+            s.wpKeypoint=arr2[i];
+            s.wpProspectPerformance=arr3[i]
+            s.wpRemark=arr5[i];
+            s.wpStarttime=arr6[i];
+            s.wpEndtime=arr7[i];
+            workPlanList.push(s)
+        }
+        console.log(workPlanList)
+        $.ajax({
+            type : "POST", //提交方式
+            url :"/workplan/wirteWork",//路径
+            data : JSON.stringify(workPlanList),
+            contentType : "application/json",
+            traditional: true,
+            dataType:"json",
+            success:function (data) {
+                alert("提交成功,快开始今天的工作吧!");
+            },
+            error:function () {}
+        })
+    });
+</script>
+<script>
+    $(document).on("click","#check",function(){
+        $(".textContent").val("")
 
-	  })
-  </script>
+    })
+</script>
 </html>
